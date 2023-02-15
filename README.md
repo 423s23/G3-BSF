@@ -26,11 +26,18 @@ Next, you want to clone this repo onto your machine, which holds all our source 
 
 ## Layout of repo
 
-There are three folders in this directory: `src`, `node_modules`, and `public`. 
+There are two main folders: `server` and `client`.
+For now, there is just a temporary `server.js` file that is just temporary place for where we will continue developing the server.
+
+In the `client` folder there are three more folders:
+- `src`
+-`node_modules`
+-`public`
+
 `src` holds the App.js files as well as all other react components.
 `node_modules` contains all the nodes information when you perform a `npm install`. 
 `public` holds the index.html file.
-There are two files at the root of the directory `package.json` and `package-lock.json`. 
+
 
 ## Local development.
 First things first. In order to start developing locally-- you'll have to change `"start": xxxx,` (underneath "scripts" in `package.json`\
