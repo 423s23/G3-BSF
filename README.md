@@ -1,4 +1,4 @@
-# Brider Ski Foundation Sign-Up App
+# Bridger Ski Foundation Sign-Up App
 
 This app is designed to help and increase the workflow for regersting and signing up volunteers for brider ski actvities and events!
 Do to the fact that this is the web-app, there is no installation need for the users. All they have to do is go to[BSF Signup] for the latest builld.
