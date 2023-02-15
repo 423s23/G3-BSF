@@ -1,14 +1,46 @@
-# Getting Started with Create React App
+# Brider Ski Foundation Sign-Up App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This app is designed to help and increase the workflow for regersting and signing up volunteers for brider ski actvities and events!
+Do to the fact that this is the web-app, there is no installation need for the users. All they have to do is go to[BSF Signup] for the latest builld.
 
-## Available Scripts
+We wanted the over-all feel of the app to feel smooth and easy to navigate.\
+This is our zero-feture relase, so for the time being... it's really easy to navigate due to the fact that there is nothing! 
 
-In the project directory, you can run:
+## Bugs
+If you find any bugs you can reach out to [Alex](a1Krings@icloud.com).
+- Please include a short description, time of the event, and a screenshot (if possible).
 
+
+## Getting Started 
+
+We used react to bootstrap and get the app up and runing. [Create React App](https://github.com/facebook/create-react-app).
+In order to start developing, you need to make sure that you have npm installed on your machine.
+
+You can run the following command to make sure that you have the most recent version of npm installed on your machine:
+
+### `npm install -g npm`
+
+IF you have any issues with installation-- we recommned checking out npms documentation. [npm docs](https://docs.npmjs.com/downloading-and-installing-node-js-and-npm).
+
+Next, you want to clone this repo onto your machine, which holds all our source code for this project.
+
+## Layout of repo
+
+There are three folders in this directory: `src`, `node_modules`, and `public`. 
+`src` holds the App.js files as well as all other react components.
+`node_modules` contains all the nodes information when you perform a `npm install`. 
+`public` holds the index.html file.
+There are two files at the root of the directory `package.json` and `package-lock.json`. 
+
+## Local development.
+First things first. In order to start developing locally-- you'll have to change `"start": xxxx,` (underneath "scripts" in `package.json`\
+to: ` "start":
+"react-scripts start",`
+
+After that... you can run the folling command:
 ### `npm start`
 
-Runs the app in the development mode.\
+This runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
@@ -29,42 +61,3 @@ Your app is ready to be deployed!
 
 See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
