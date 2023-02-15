@@ -7,7 +7,7 @@ We wanted the over-all feel of the app to feel smooth and easy to navigate.\
 This is our zero-feture relase, so for the time being... it's really easy to navigate due to the fact that there is nothing! 
 
 ## Bugs
-If you find any bugs you can reach out to [Alex](a1Krings@icloud.com).
+If you find any bugs you can reach out to Alex at a1Krings@icloud.com
 - Please include a short description, time of the event, and a screenshot (if possible).
 
 
