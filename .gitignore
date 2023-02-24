@@ -66,5 +66,4 @@ node_modules/
 .env
 
 .idea
-
-**/.DS_Store
+.DS_Store

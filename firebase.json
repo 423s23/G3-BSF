@@ -19,7 +19,7 @@
     "rules": "database.rules.json"
   },
   "hosting": {
-    "public": "public",
+    "public": "react_project/build",
     "ignore": [
       "firebase.json",
       "**/.*",
