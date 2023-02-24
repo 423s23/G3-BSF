@@ -42,6 +42,7 @@ export default function Root(){
                 <List>
                     <Link to={`series`}>SeriesDetailScreen</Link>
                     <Link to={`checkin`}><ListItemButton>CheckInScreen</ListItemButton></Link>
+                    <Link to={`editvolunteers`}><ListItemButton>editRegisteredVolunteers</ListItemButton></Link>
                 </List>
                 
             </Drawer>

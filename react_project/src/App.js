@@ -6,6 +6,7 @@ import {
 import Root from "./screens/root"
 import SeriesDetailScreen from "./screens/seriesdetailscreen"
 import CheckInScreen from "./screens/checkinscreen"
+import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 
 
 function App() {
@@ -22,6 +23,10 @@ function App() {
        {
          path: "checkin",
          element: <CheckInScreen />,
+       },
+       {
+        path: "editvolunteers",
+        element: <EditRegisteredVolunteers />
        }
       ]
     }
