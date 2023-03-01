@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "name": "bsf",
   "version": "0.1.0",
   "private": true,
@@ -34,5 +35,9 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+=======
+  "dependencies": {
+    "firebase-admin": "^11.5.0"
+>>>>>>> e7bcfe580657b3d0bb91307bb1a0effe6e6cf9a6
   }
 }
