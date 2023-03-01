@@ -11,6 +11,9 @@ import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import MenuItem from '@mui/material/MenuItem';
 
+import PositionPicker from './positionPicker.js';
+import Waiver from './waiver.js';
+
 
 
 const theme = createTheme();
@@ -121,7 +124,7 @@ function ContactInfo(){
 
 function StepperFunction(){
     const steps = ['Contact Info', 'Position', 'Waiver', 'Submit'];
-    const steps2 = [<ContactInfo/>]
+    const steps2 = [<ContactInfo/>, <PositionPicker/>, <Waiver/>]
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
 
