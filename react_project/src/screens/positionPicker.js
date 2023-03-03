@@ -12,6 +12,7 @@ const columns = [
  
   { field: 'pos', headerName: 'Position', width: 130 },
   { field: 'desc', headerName: 'Description', width: 412 },
+  {field: 'num', headerName: 'Volunteers Needed', width: 150},
   
 ];
 
@@ -38,7 +39,7 @@ const [selectionModel, setSelectionModel] = React.useState([]);
                         alignItems: 'center',
                     }}
                 >
-        <div style={{ height: 400, width: '150%' }}>
+        <div style={{ height: 400, width: '190%' }}>
         <DataGrid
             getRowHeight={() => 'auto'}
             rows={rows}
