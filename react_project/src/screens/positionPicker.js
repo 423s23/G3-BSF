@@ -1,18 +1,18 @@
 
 import * as React from 'react';
-import { DataGrid } from '@mui/x-data-grid';
+
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
-
+import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-
 import MenuItem from '@mui/material/MenuItem';
 const theme = createTheme();
 const columns = [
  
   { field: 'pos', headerName: 'Position', width: 130 },
   { field: 'desc', headerName: 'Description', width: 412 },
+  {field: 'num', headerName: 'Volunteers Needed', width: 150},
   
 ];
 
@@ -22,8 +22,12 @@ const rows = [
   { id: 3, desc: 'N/A', pos: 'Bird Watcher'},
 ];
 
+
 export default function PositionPicker() {
+const cellClickRef = React.useRef(null);
+const [selectionModel, setSelectionModel] = React.useState([]);
   return (
+    
     <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -35,25 +39,32 @@ export default function PositionPicker() {
                         alignItems: 'center',
                     }}
                 >
-        <div style={{ height: 400, width: '150%' }}>
+        <div style={{ height: 400, width: '190%' }}>
         <DataGrid
             getRowHeight={() => 'auto'}
             rows={rows}
             columns={columns}
             pageSize={5}
+            checkboxSelection
             rowsPerPageOptions={[5]}
             hideFooterSelectedRowCount={true}
-            onSelectionModelChange={(selection) => {
+            selectionModel={selectionModel}
+            onCellClick={() => (cellClickRef.current = true)}
+            onSelectionModelChange={(selection, detail) => {
+              if (cellClickRef.current) {
                 if (selection.length > 1) {
-                /*  const selectionSet = new Set(selectionModel);*/
-                 /* const result = selection.filter((s) => !selectionSet.has(s));*/
-        
-                  /*setSelectionModel(result);*/
+                  const selectionSet = new Set(selectionModel);
+                  const result = selection.filter((s) => !selectionSet.has(s));
+      
+                  setSelectionModel(result);
                 } else {
-                  /*setSelectionModel(selection);*/
+                  setSelectionModel(selection);
                 }
-            }
-            }
+              } else {
+                setSelectionModel(selection);
+              }
+              cellClickRef.current = null;
+            }}
         />
         </div>
         </Box>
