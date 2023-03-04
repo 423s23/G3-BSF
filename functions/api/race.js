@@ -1,20 +1,34 @@
 const { db } = require('../util/admin');
 
-exports.getRace = (request, response) => {
+exports.getRaces = (request, response) => {
      db.collection('Races').get()
     .then((data) => {
         let races = [];
         data.forEach((doc) => {
             races.push({
                 raceId: doc.id,
-                RaceSeriesName: doc.data().RaceSeriesName,
-                description: doc.data().description,
-                VolunteerDays: doc.data().VolunteerDays,
+                raceName: doc.data().RaceSeriesName,
             });
         });
         return response.json(races);
     })
 }
 
+exports.getRace = (request, response) => {
+    raceId = request.params.raceId
+
+    db.collection('Races').doc(raceId).get().then((data) => {
+        return response.json(data);  
+    })
+}
 
 
+
+exports.getRacePositions = () => {
+    raceId = request.params.raceId
+
+    db.collection('Races').doc(raceId).get().then((data) => {
+        return response.json(data);  
+    })    
+
+}
