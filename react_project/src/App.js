@@ -4,9 +4,10 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from "./screens/root"
-import SeriesDetailScreen from "./screens/seriesdetailscreen"
+import RaceDetailScreen from "./screens/racedetailscreen"
 import CheckInScreen from "./screens/checkinscreen"
 import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
+import RacesScreen from "./screens/racesscreen"
 
 
 function App() {
@@ -17,8 +18,12 @@ function App() {
       element: <Root />,
       children: [
        {
-         path: "series",
-         element: <SeriesDetailScreen />,
+        path: "races",
+        element: <RacesScreen />,
+       },
+       {
+         path: "race/:raceId",
+         element: <RaceDetailScreen />,
        },
        {
          path: "checkin",
