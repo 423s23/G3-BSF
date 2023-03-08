@@ -9,6 +9,7 @@ import CheckInScreen from "./screens/checkinscreen"
 import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
+import RaceDetailScreen from "./screens/racedetailscreen"
 
 
 function App() {
@@ -18,22 +19,30 @@ function App() {
       path: "/",
       element: <Root />,
       children: [
-       {
-         path: "series",
-         element: <SeriesDetailScreen />,
-       },
-       {
-         path: "checkin",
-         element: <CheckInScreen />,
-       },
-       {
-        path: "editvolunteers",
-        element: <EditRegisteredVolunteers />
-       },
-       {
-        path: "volunteers",
-        element: <VolunteerScreen />
-       }
+        {
+          path: "races",
+          element: <RacesScreen />
+        },
+        {
+          path: "race/:raceId",
+          element: <RaceDetailScreen />,
+        },
+        {
+          path: "series",
+          element: <SeriesDetailScreen />,
+        },
+        {
+          path: "checkin",
+          element: <CheckInScreen />,
+        },
+        {
+          path: "editvolunteers",
+          element: <EditRegisteredVolunteers />
+        },
+        {
+          path: "volunteers",
+          element: <VolunteerScreen />
+        }
       ]
     }
   ]);

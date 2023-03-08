@@ -1,6 +1,5 @@
 import axios from 'axios';
 import { useEffect, useState, Fragment } from "react";
-import CustomTable from '../components/customtable';
 
 export default function VolunteerScreen() {
 
