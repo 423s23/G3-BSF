@@ -9,6 +9,7 @@ This is our zero-feture relase, so for the time being... it's really easy to nav
 ## Bugs
 If you find any bugs you can reach out to Alex at a1Krings@icloud.com
 - Please include a short description, time of the event, and a screenshot (if possible).
+- Bug tracker: null
 
 
 ## Getting Started 
@@ -24,19 +25,48 @@ IF you have any issues with installation-- we recommned checking out npms docume
 
 Next, you want to clone this repo onto your machine, which holds all our source code for this project.
 
+## Firebase
+This web-app is being hosted and run using Firebase.
+Two important commands for Firebase:
+- `npm run build` and `firebase deploy`
+These two commands will update the firbase website to whatever changes have been made in the main branch.
+Every sprint, we create a new branch to develope on and merege that over at the end of the sprint.
+
 ## Layout of repo
 
-There are two main folders: `server` and `client`.
-For now, there is just a temporary `server.js` file that is just temporary place for where we will continue developing the server.
+The two main folders for development are `functions` and `react_project`.
 
-In the `client` folder there are three more folders:
-- `src`
--`node_modules`
--`public`
+### Functions 
+This folder is where we make and create our firebase calls so that we can pull and push our data.
+There are two additional folders `api` and `util`
+- `api` contains the routing used by the firebase api
+- `util` is where we actually contain the cloud functions where we specify what we want to pull.
 
-`src` holds the App.js files as well as all other react components.
-`node_modules` contains all the nodes information when you perform a `npm install`. 
-`public` holds the index.html file.
+### React Project
+Now here is where the real magic happens.
+
+Before we go to far, you will need to make sure you npm install the following:
+- `npm install @mui/material @emotion/react @emotion/styled @mui/x-data-grid-pro`
+- `npm install firebase`
+- `npm install axios`
+The firebase and axios are used for getting the data from firebase, and @mui is used for various styling used in our prject.
+
+So within react project--we have three folders: `build`, `public`, and `src`.
+We don't mess with build. Firebase uses this folder to build and compile our project.
+
+The public folder, is also boring. This just holds a index.html file.
+
+Now `src`. `src` is a fun time.
+#### src
+This holds our `app.js` file as well as (you guessed it) contains more folders.
+`components` and `screens`
+- `components` -- is where we put our helper components for everything in `screens`.
+- `screens` -- this holds all of our individual pages (or screens if you would) for the website. 
+
+And that is that.
+
+### Firebase
+So for both our hosting and database we are using firebase. 
 
 
 ## Local development.
