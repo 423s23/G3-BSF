@@ -27,12 +27,11 @@ export default function Help(){
             <a href="https://github.com/423s23/G3-BSF.git">GitHub Repo</a>
 
             <h3>Working Features/Commands</h3>
-            <p> 
-                - We can pull from db
-                - Pretty(ish) looking pages
-                - Waiver Working
-                
-            </p>
+            <ul> 
+                <li>We can pull from db</li>
+                <li>Pretty(ish) looking pages</li>
+                <li>Waiver Working</li>
+            </ul>
         </div>
     );
 }
