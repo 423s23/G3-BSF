@@ -38,7 +38,7 @@ export default function CheckInScreen() {
 
     return (
         <Box>
-            {/*<ContactInfo/>*/}
+
             <StepperFunction/>
         </Box>
     )
