@@ -27,10 +27,8 @@ Next, you want to clone this repo onto your machine, which holds all our source 
 
 ## Firebase
 This web-app is being hosted and run using Firebase.
-Two important commands for Firebase:
-- `npm run build` and `firebase deploy`
-These two commands will update the firbase website to whatever changes have been made in the main branch.
-Every sprint, we create a new branch to develope on and merege that over at the end of the sprint.
+This is what we are also using for our database!
+Every sprint, we create a new branch to develop on and merge that branch over to main at the end of the sprint.
 
 ## Layout of repo
 
@@ -65,8 +63,10 @@ This holds our `app.js` file as well as (you guessed it) contains more folders.
 
 And that is that.
 
-### Firebase
-So for both our hosting and database we are using firebase. 
+## Pushing to live
+In order to update the live server you need to run the following commands:
+- Inside `react_project` run the following: `npm run build` 
+- And then from the `root` run `firebase deploy`
 
 
 ## Local development.
