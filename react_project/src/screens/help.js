@@ -21,6 +21,17 @@ export default function Help(){
             <h3>Bugs!</h3>
             <p>
                 - If there are any bugs/probelms with the website please contact Alex Krings @406.202.1296 or A1Krings@gmail.com
+                - We have a bug tracker located in our <a href="https://tasks.office.com/montanaedu.onmicrosoft.com/Home/PlanViews/8zZX43In5U-nne1L0M6HVWQAGiwh?Type=PlanLink&Channel=Link&CreatedTime=638140670776530000">backlog</a>
+            </p>
+            <h3>Github: </h3>
+            <a href="https://github.com/423s23/G3-BSF.git">GitHub Repo</a>
+
+            <h3>Working Features/Commands</h3>
+            <p> 
+                - We can pull from db
+                - Pretty(ish) looking pages
+                - Waiver Working
+                
             </p>
         </div>
     );
