@@ -10,6 +10,7 @@ import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen from "./screens/racedetailscreen"
+import Help from "./screens/help"
 
 
 function App() {
@@ -42,6 +43,10 @@ function App() {
         {
           path: "volunteers",
           element: <VolunteerScreen />
+        },
+        {
+          path: "help",
+          element: <Help />
         }
       ]
     }
