@@ -1,5 +1,11 @@
 const functions = require("firebase-functions");
+const {getRace, getRaces, getVolunteerPositions} = require('./api/race')
+const {getVolunteers} = require("./api/volunteer")
+
+
 const app = require('express')();
+const cors = require('cors');
+app.use(cors({origin: true}));
 
 
 // // Create and deploy your first functions
@@ -9,8 +15,13 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
     response.send("Hello from Firebase!");
 });
 
+//race data
+app.get('/races', getRaces);
+app.get('/races/:raceId', getRace);
+app.get("/races/:raceId/positions", getVolunteerPositions);
 
-const {getRace} = require('./api/race')
+//volunteer data
+app.get("/volunteers", getVolunteers);
 
-app.get('/race', getRace);
+
 exports.api = functions.https.onRequest(app);
