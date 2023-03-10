@@ -1,6 +1,7 @@
 
 import * as React from 'react';
-
+import axios from 'axios';
+import { useEffect, useState } from "react";
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
@@ -26,8 +27,32 @@ const rows = [
 export default function PositionPicker() {
 const cellClickRef = React.useRef(null);
 const [selectionModel, setSelectionModel] = React.useState([]);
+const RaceId = "hhIyHeFAC7HiyoHhf6Qi"
+const [PositionData, setPositionData] = useState([]);
+    useEffect(() => {
+        axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/' + RaceId + "/positions")
+        //axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/abstractPositions/')
+            .then(function (response) {
+                setPositionData(response.data)
+            })
+            .catch(function (error) {
+                // handle error
+                console.log(error);
+                setPositionData("There was an error: " + error)
+            })
+    }, [])
+
+
+const testRow = PositionData.map(test => {
+  return{
+    id: test.PositionId,
+    desc: test.Position,
+    pos: test.PositionId,
+    num: test.VolunteersNeeded
+  }
+})
+
   return (
-    
     <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
         <CssBaseline />
@@ -37,12 +62,13 @@ const [selectionModel, setSelectionModel] = React.useState([]);
                         display: 'flex',
                         flexDirection: 'column',
                         alignItems: 'center',
+                        width:'100%',
                     }}
                 >
         <div style={{ height: 400, width: '190%' }}>
         <DataGrid
             getRowHeight={() => 'auto'}
-            rows={rows}
+            rows={testRow}
             columns={columns}
             pageSize={5}
             checkboxSelection
@@ -68,6 +94,10 @@ const [selectionModel, setSelectionModel] = React.useState([]);
         />
         </div>
         </Box>
+         <p>
+            {JSON.stringify(PositionData, null, 2) }
+          </p>
+          
         </Container>
         
     </ThemeProvider >
