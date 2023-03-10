@@ -1,6 +1,7 @@
 const functions = require("firebase-functions");
 const {getRace, getRaces, getVolunteerPositions} = require('./api/race')
 const {getVolunteers} = require("./api/volunteer")
+const{getAbstractVolunteerPositions} = require("./api/abstract")
 
 
 const app = require('express')();
@@ -22,6 +23,6 @@ app.get("/races/:raceId/positions", getVolunteerPositions);
 
 //volunteer data
 app.get("/volunteers", getVolunteers);
-
+app.get("/abstract", getAbstractVolunteerPositions);
 
 exports.api = functions.https.onRequest(app);
