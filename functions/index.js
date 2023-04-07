@@ -1,7 +1,8 @@
 const functions = require("firebase-functions");
-const {getRace, getRaces, getVolunteerPositions} = require('./api/race')
+const {getRace, getRaces, getVolunteerPositions, createRace, emailVouchers} = require('./api/race')
 const {getVolunteers} = require("./api/volunteer")
 const{getAbstractVolunteerPositions} = require("./api/abstract")
+
 
 
 const app = require('express')();
@@ -20,9 +21,15 @@ exports.helloWorld = functions.https.onRequest((request, response) => {
 app.get('/races', getRaces);
 app.get('/races/:raceId', getRace);
 app.get("/races/:raceId/positions", getVolunteerPositions);
+app.post("/races/new", createRace)
+app.post("/races/:raceId/emailvouchers", emailVouchers);
 
 //volunteer data
 app.get("/volunteers", getVolunteers);
 app.get("/abstract", getAbstractVolunteerPositions);
+
+
+
+
 
 exports.api = functions.https.onRequest(app);

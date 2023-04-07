@@ -1,17 +1,59 @@
+import { Container, Divider, Stack } from '@mui/material';
+import Button from "@mui/material/Button";
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import DateChipArray from '../components/datechiparray';
+
+import { useLoaderData } from "react-router-dom";
+
+export async function loader({ params }) {
+    const raceId = params.raceId
+    return raceId;
+}
 
 
-export default function RaceDetailScreen({params}) {
+export default function RaceDetailScreen() {
+    const raceId = useLoaderData();
 
-    //const RaceId = params.raceId
-    const RaceId = "hhIyHeFAC7HiyoHhf6Qi"
+    const openCheckInScreen = function(){
+        console.log("launching check in screen!")
+    }
 
-    const [RaceData, setRaceData] = useState([]);
+    const sendTestEmail = function () {
+        console.log("sending email")
+        axios.post(
+            "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/" + raceId + "/emailvouchers",
+            {
+                firstName: "testMichael",
+                lastName: "testBuffington",
+                email: "michael.t.buffington@gmail.com"
+            },
+        ).then(
+            function (response) {
+                console.log(response)
+            }
+        ).catch(
+            function (error) {
+                console.log(error)
+            }
+        )
+    }
+
+    const [raceData, setRaceData] = useState([]);
     useEffect(() => {
-        axios.get(`https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/${RaceId}`)
+        axios.get(`https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/${raceId}`)
             .then(function (response) {
-                setRaceData(response.data)
+                const data = response.data
+                data.StartDate = Date(data.StartDate.seconds)
+                const vdates = []
+                data.VolunteerDays.forEach(
+                    (day) => {
+                        vdates.push(Date(day.seconds))
+                    }
+                )
+                data.VolunteerDays = vdates
+                console.log(data)
+                setRaceData(data)
             })
             .catch(function (error) {
                 // handle error
@@ -20,9 +62,9 @@ export default function RaceDetailScreen({params}) {
             })
     }, [])
 
-    const [PositionData, setPositionData] = useState([]);
+    const [positionData, setPositionData] = useState([]);
     useEffect(() => {
-        axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/' + RaceId + "/positions")
+        axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/' + raceId + "/positions")
             .then(function (response) {
                 setPositionData(response.data)
             })
@@ -34,21 +76,36 @@ export default function RaceDetailScreen({params}) {
     }, [])
 
     return (
-        <div>
-            <h2>Implement me!</h2>
-            <h3>
-              Race data: 
-            </h3>
-            <p>
-            {JSON.stringify(RaceData, null, 2) }
-            </p>
-            <h3>
-                Volunteer Positions
-            </h3>
-            <p>
-            {JSON.stringify(PositionData, null, 2) }
-            </p>
+        <Container>
+            <Stack>
+                //chip array for dates
+                <DateChipArray />
+                <Divider >
+                </Divider>
+                <p>
+                    list of positions with who is signed up
+                </p>
+                {JSON.stringify(raceData, null, 2)}
+                <Divider />
+                <Button
+                    variant="contained"
+                    onClick={sendTestEmail}
+                >
+                    Test Emailing
+                </Button>
+                <Button
+                    variant="contained"
+                    onClick={openCheckInScreen}
+                >
+                    Launch CheckIn
+                </Button>
 
-        </div>
+
+                <p>
+                    launch checkin screen
+                </p>
+                {JSON.stringify(positionData, null, 2)}
+            </Stack>
+        </Container>
     );
 }
