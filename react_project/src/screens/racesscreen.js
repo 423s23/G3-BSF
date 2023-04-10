@@ -1,13 +1,20 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+
 
 import CustomTable from '../components/customtable';
 import NewRacePopup from '../components/newracepopup'
 
 import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal"
 
 export default function RacesScreen() {
+
+  const [appBarTitle, setTitle] = useOutletContext();
+
+  useEffect(()=> {
+    setTitle("BSF Race Screen!")
+  },[appBarTitle])
 
   const [show, setShow] = useState(false);
   const handleOpen = function () {
@@ -54,21 +61,12 @@ export default function RacesScreen() {
   
       </div>
 
-      <Modal
+      <NewRacePopup 
         open={show}
         onClose={handleClose}
-        aria-labelledby="parent-modal-title"
-        style={{
-          display: "flex",
-          alignItems: "center",
-          justifyContent: "center",
+      />
 
-        }}
 
-      >
-        <NewRacePopup />
-
-      </Modal>
     </div>
   );
 }

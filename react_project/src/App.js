@@ -9,8 +9,10 @@ import CheckInScreen from "./screens/checkinscreen"
 import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
-import RaceDetailScreen, {loader as RaceIdLoader} from "./screens/racedetailscreen"
+import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
 import Help from "./screens/help"
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 
 
 function App() {
@@ -52,6 +54,7 @@ function App() {
       ]
     }
   ]);
+  const theme = createTheme()
 
   return (
     <RouterProvider router={router} />

@@ -1,4 +1,4 @@
-import { Box, Card, CardActions, CardContent, CardHeader, Collapse, IconButton, Stack } from '@mui/material';
+import { Box, Card, CardActions, CardContent, CardHeader, Collapse, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack } from '@mui/material';
 import TextField from '@mui/material/TextField';
 import axios from 'axios';
 import Button from '@mui/material/Button';
@@ -7,8 +7,14 @@ import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import { useState } from 'react';
 
 
-export default function NewRacePopup() {
+export default function NewRacePopup(props) {
 
+    const { onClose, open } = props;
+
+
+    const closePopup = function () {
+        onClose()
+    }
 
     const [name, namehandler] = useState("")
     function updateName(name) {
@@ -37,21 +43,24 @@ export default function NewRacePopup() {
                 raceName: name,
                 startDate: startDate,
             },
-            ).then(
-                function (response) {
-                    console.log(response)
-                    //open new screen
-                }
-            ).catch(
-                function (error) {
-                    console.log(error)
-                }
-            )
+        ).then(
+            function (response) {
+                console.log(response)
+                //open new screen
+                closePopup()
+            }
+        ).catch(
+            function (error) {
+                console.log(error)
+                closePopup()
+            }
+        )
+
     }
 
 
     const formcontent = (
-        <Stack id="NewRaceForm" spacing={2}>
+        <Stack id="NewRaceForm" mt={1} spacing={2}>
             <TextField
                 id="outlined-basic"
                 label="Race Series Name"
@@ -75,46 +84,42 @@ export default function NewRacePopup() {
     )
 
     const advancedsettings = (
-        <CardContent>
-            <p>
+        <DialogContent>
+            <DialogContentText>
                 these could be advanced settings if needed
-            </p>
-        </CardContent>
+            </DialogContentText>
+        </DialogContent>
     )
 
 
     return (
-        <Box maxWidth={"66%"} style={{ display: "flex", alignItems: "center" }}>
-            <Card>
-                <CardHeader
-                    title="New Race Series"
-                />
+        <Dialog
+            keepMounted
+            onClose={closePopup}
+            open={open}
+        >
+            <DialogTitle> New Race</DialogTitle>
+            <DialogContent>
+                {formcontent}
+            </DialogContent>
+            <DialogActions
+            sx={{justifyContent: "space-between"}}
+            >
 
-                <CardContent>
-                    {formcontent}
-                </CardContent>
-                <CardActions
-                    style={{
-                        justifyContent: "space-between",
-                    }}
+                <Button
+                    startIcon={<KeyboardArrowDownIcon />}
+                    aria-label="ShowAdvancedSettings"
+                    onClick={toggleAdvancedSettings}
                 >
-                    <Button
-                        startIcon={<KeyboardArrowDownIcon />}
-                        aria-label="ShowAdvancedSettings"
-                        onClick={toggleAdvancedSettings}
-                    >
-                        Advanced
-                    </Button>
-                    <Button aria-label="Create" variant="contained" onClick={submitNewRace}>
-                        Create
-                    </Button>
-                </CardActions>
-                <Collapse in={showAdvanced} timeout="auto" unmountOnExit>
-                    {advancedsettings}
-                </Collapse>
-
-            </Card>
-        </Box>
-
+                    Advanced
+                </Button>
+                <Button aria-label="Create" variant="contained" onClick={submitNewRace}>
+                    Create
+                </Button>
+            </DialogActions>
+            <Collapse in={showAdvanced} timeout="auto" unmountOnExit>
+                {advancedsettings}
+            </Collapse>
+        </Dialog>
     )
 }

@@ -2,6 +2,8 @@ import { Container, Divider, Stack } from '@mui/material';
 import Button from "@mui/material/Button";
 import axios from 'axios';
 import { useEffect, useState } from "react";
+import { useOutletContext } from "react-router-dom";
+
 import DateChipArray from '../components/datechiparray';
 
 import { useLoaderData } from "react-router-dom";
@@ -14,6 +16,8 @@ export async function loader({ params }) {
 
 export default function RaceDetailScreen() {
     const raceId = useLoaderData();
+
+    const [appBarTitle, setTitle] = useOutletContext();
 
     const openCheckInScreen = function(){
         console.log("launching check in screen!")
@@ -39,21 +43,29 @@ export default function RaceDetailScreen() {
         )
     }
 
+
+
     const [raceData, setRaceData] = useState([]);
+
     useEffect(() => {
         axios.get(`https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/${raceId}`)
             .then(function (response) {
                 const data = response.data
-                data.StartDate = Date(data.StartDate.seconds)
+                data.StartDate = new Date(data.StartDate._seconds)
                 const vdates = []
                 data.VolunteerDays.forEach(
                     (day) => {
-                        vdates.push(Date(day.seconds))
+
+                        var d = new Date(day._seconds*1000)
+                        console.log(d)
+                        console.log(typeof d)
+                        vdates.push(d)
                     }
                 )
                 data.VolunteerDays = vdates
-                console.log(data)
                 setRaceData(data)
+                setTitle(data.Name)
+
             })
             .catch(function (error) {
                 // handle error
@@ -78,8 +90,8 @@ export default function RaceDetailScreen() {
     return (
         <Container>
             <Stack>
-                //chip array for dates
-                <DateChipArray />
+                chip array for dates
+                <DateChipArray dates={raceData.VolunteerDays}/> 
                 <Divider >
                 </Divider>
                 <p>

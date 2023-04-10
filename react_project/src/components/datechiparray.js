@@ -4,27 +4,38 @@ import Chip from '@mui/material/Chip';
 import Paper from '@mui/material/Paper';
 import { useState } from 'react';
 
+
 const ListItem = styled('li')(({ theme }) => ({
     margin: theme.spacing(0.5),
 }));
 
-export default function DateChipArray() {
-    const [chipData, setChipData] = React.useState([
-        { key: 0, label: '1/3/23' },
-        { key: 1, label: '1/4/23' },
-        { key: 2, label: '1/5/23' },
-        { key: 3, label: '+' },
+const printableDate = function(d){
+    const date = new Date(d)
 
-    ]);
+    const dayNames = ["Sun","Mon","Tue","Wed","Thur","Fri","Sat"];
+    const day = dayNames[date.getDay()];
+    const month = date.getMonth().toString();
+    const monthDate = date.getDate().toString();
+
+    const res = day + " " + month + "/" + monthDate
+
+    return res;
+}
+
+export default function DateChipArray(props) {
+
+    const { dates } = props;
 
     const [focus, setfocus] = useState(0)
+
     function changeFocus(key){
+        console.log(key)
         setfocus(key)
     }
 
-    const handleDelete = (chipToDelete) => () => {
-        setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
-    };
+    //const handleDelete = (chipToDelete) => () => {
+    //    setChipData((chips) => chips.filter((chip) => chip.key !== chipToDelete.key));
+    //};
 
     return (
         <Paper
@@ -39,14 +50,14 @@ export default function DateChipArray() {
             }}
             component="ul"
         >
-            {chipData.map((data) => {
+            {dates?.map((date) => {
                 return (
-                    <ListItem key={data.key}>
+                    <ListItem key={date}>
                         <Chip
-                            color = {data.key == focus ? "secondary" : "primary" }
+                            color = {date == focus ? "secondary" : "primary" }
                             size='medium'
-                            label={data.label}
-                            onClick={() => {changeFocus(data.key)}}
+                            label={printableDate(date)}
+                            onClick={() => {changeFocus(date)}}
 
                         />
                     </ListItem>
