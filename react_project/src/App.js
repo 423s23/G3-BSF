@@ -11,6 +11,7 @@ import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen from "./screens/racedetailscreen"
 import Help from "./screens/help"
+import AdminLoginScreen from "./screens/adminLoginScreen";
 
 
 function App() {
@@ -43,6 +44,10 @@ function App() {
         {
           path: "volunteers",
           element: <VolunteerScreen />
+        },
+        {
+          path: "adminlogin",
+          element: <AdminLoginScreen />
         },
         {
           path: "help",

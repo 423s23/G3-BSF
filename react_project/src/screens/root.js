@@ -45,6 +45,7 @@ export default function Root(){
                     <Link to={`editvolunteers`}><ListItemButton>editRegisteredVolunteers</ListItemButton></Link>
                     <Link to={`volunteers`}> <ListItemButton>Volunteers</ListItemButton></Link>
                     <Link to={`races`}><ListItemButton> Races </ListItemButton></Link>
+                    <Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>
                     <Link to={'help'}><ListItemButton>Help</ListItemButton></Link>
 
                 </List>
