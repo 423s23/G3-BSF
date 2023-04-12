@@ -29,6 +29,7 @@ jobs:
     
     - run: npm run build --if-present
     - run: npm test
+      working-directory: react_project
     - run: npm ci
       working-directory: react_project
 
