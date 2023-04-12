@@ -7,7 +7,6 @@ import { DataGrid} from '@mui/x-data-grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
-const theme = createTheme();
 
 
 const edit = (Selection) => {
@@ -34,7 +33,6 @@ const cellClickRef = React.useRef(null);
 const [selectionModel, setSelectionModel] = React.useState([]);
   return (
     
-    <ThemeProvider theme={theme}>
         <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -86,7 +84,6 @@ const [selectionModel, setSelectionModel] = React.useState([]);
         </Box>
         </Container>
         
-    </ThemeProvider >
       
     
   );
