@@ -1,6 +1,6 @@
 {
+  "name": "G3-BSF",
+  "version": "1.0.0",
   "dependencies": {
-    "dotenv": "^16.0.3",
-    "nodemailer": "^6.9.1"
   }
 }

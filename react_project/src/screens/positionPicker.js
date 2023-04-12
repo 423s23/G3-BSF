@@ -2,13 +2,12 @@
 import * as React from 'react';
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { createTheme} from '@mui/material/styles';
 import Box from '@mui/material/Box';
 import { DataGrid, GridColDef } from '@mui/x-data-grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import MenuItem from '@mui/material/MenuItem';
-const theme = createTheme();
 const columns = [
 
   { field: 'pos', headerName: 'Position', width: 130 },

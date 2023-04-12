@@ -13,7 +13,6 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
-const theme = createTheme();
 
 export default function AdminLoginScreen() {
 
@@ -29,7 +28,6 @@ export default function AdminLoginScreen() {
     // };
 
     return (
-        <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -95,6 +93,5 @@ export default function AdminLoginScreen() {
                     </Box>
                 </Box>
             </Container>
-        </ThemeProvider>
     );
 }
