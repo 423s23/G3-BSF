@@ -10,6 +10,7 @@ import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
+import ImportCSV from "./screens/importcsv"
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
 
@@ -46,6 +47,10 @@ function App() {
         {
           path: "volunteers",
           element: <VolunteerScreen />
+        },
+        {
+          path:"importcsv",
+          element:<ImportCSV />
         },
         {
           path: "adminlogin",
