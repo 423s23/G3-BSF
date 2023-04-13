@@ -3,20 +3,25 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Drawer, List, ListItemButton } from '@mui/material';
+import { Container, CssBaseline, Drawer, List, ListItemButton } from '@mui/material';
 import { useState } from 'react';
-import {Link, Outlet} from 'react-router-dom'
+import { Link, Outlet } from 'react-router-dom'
+import Palette from './Palette'
 
-export default function Root(){
+export default function Root() {
+
+    const [appBarTitle, setTitle] = useState("BSF App")
 
     const [drawerState, toggleDrawer] = useState(false)
 
-    const handleDrawer = function(){
-        toggleDrawer(!drawerState); 
+    const handleDrawer = function () {
+        toggleDrawer(!drawerState);
     }
 
     return (
-        <div>
+        <Palette>
+        <Container component="main" maxWidth="false" disableGutters="true">
+            <CssBaseline />
             <AppBar position="static">
                 <Toolbar>
                     <IconButton
@@ -30,9 +35,11 @@ export default function Root(){
                         <MenuIcon />
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
+                        {appBarTitle}
                     </Typography>
                 </Toolbar>
             </AppBar>
+
             <Drawer
                 anchor="left"
                 open={drawerState}
@@ -45,17 +52,21 @@ export default function Root(){
                     <Link to={`editvolunteers`}><ListItemButton>editRegisteredVolunteers</ListItemButton></Link>
                     <Link to={`volunteers`}> <ListItemButton>Volunteers</ListItemButton></Link>
                     <Link to={`races`}><ListItemButton> Races </ListItemButton></Link>
+                    <Link to={`importcsv`}><ListItemButton> Import Ski Codes </ListItemButton></Link>
+                    <Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>
                     <Link to={'help'}><ListItemButton>Help</ListItemButton></Link>
 
                 </List>
-                
+
             </Drawer>
+            <Container>
+                < Outlet context={[appBarTitle, setTitle]} />
+            </Container>
 
-            < Outlet />
-            
 
-        </div>
-    
+        </Container>
+        </Palette>
+
     )
 
 }
