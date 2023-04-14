@@ -6,6 +6,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import { Container, CssBaseline, Drawer, List, ListItemButton } from '@mui/material';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom'
+import Palette from './Palette'
 
 export default function Root() {
 
@@ -18,6 +19,7 @@ export default function Root() {
     }
 
     return (
+        <Palette>
         <Container component="main" maxWidth="false" disableGutters="true">
             <CssBaseline />
             <AppBar position="static">
@@ -49,6 +51,8 @@ export default function Root() {
                     <Link to={`checkin`}><ListItemButton>CheckInScreen</ListItemButton></Link>
                     <Link to={`editvolunteers`}><ListItemButton>editRegisteredVolunteers</ListItemButton></Link>
                     <Link to={`volunteers`}> <ListItemButton>Volunteers</ListItemButton></Link>
+                    <Link to={`races`}><ListItemButton> Races </ListItemButton></Link>
+                    <Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>
                     <Link to={'help'}><ListItemButton>Help</ListItemButton></Link>
 
                 </List>
@@ -60,6 +64,7 @@ export default function Root() {
 
 
         </Container>
+        </Palette>
 
     )
 

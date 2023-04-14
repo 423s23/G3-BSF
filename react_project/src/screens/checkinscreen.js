@@ -15,8 +15,6 @@ import PositionPicker from './positionPicker.js';
 import Waiver from './waiver.js';
 
 
-
-const theme = createTheme();
 const currencies = [
     {
         value: 'teamA',
@@ -46,7 +44,6 @@ export default function CheckInScreen() {
 
 function ContactInfo(){
     return (
-        <ThemeProvider theme={theme}>
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box
@@ -118,9 +115,12 @@ function ContactInfo(){
                 </Box>
 
             </Container>
-        </ThemeProvider>
     );
+
 }
+
+//export {ContactInfo}
+
 
 function StepperFunction(){
     const steps = ['Contact Info', 'Position', 'Waiver', 'Submit'];

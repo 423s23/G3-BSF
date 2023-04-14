@@ -11,7 +11,7 @@ import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
 import Help from "./screens/help"
-import { createTheme, ThemeProvider } from '@mui/material/styles';
+import AdminLoginScreen from "./screens/adminLoginScreen";
 
 
 
@@ -48,13 +48,16 @@ function App() {
           element: <VolunteerScreen />
         },
         {
+          path: "adminlogin",
+          element: <AdminLoginScreen />
+        },
+        {
           path: "help",
           element: <Help />
         }
       ]
     }
   ]);
-  const theme = createTheme()
 
   return (
     <RouterProvider router={router} />

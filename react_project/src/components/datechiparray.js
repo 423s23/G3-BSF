@@ -58,7 +58,7 @@ export default function DateChipArray(props) {
                 return (
                     <ListItem key={date}>
                         <Chip
-                            color={date === focus ? "secondary" : "primary"}
+                            color = {date === focus ? "primary" : "secondary" }
                             size='medium'
                             label={printableDate(date)}
                             onClick={() => { changeFocus(date) }}
