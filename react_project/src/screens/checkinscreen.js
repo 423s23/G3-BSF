@@ -116,7 +116,11 @@ function ContactInfo(){
 
             </Container>
     );
+
 }
+
+//export {ContactInfo}
+
 
 function StepperFunction(){
     const steps = ['Contact Info', 'Position', 'Waiver', 'Submit'];
