@@ -19,12 +19,12 @@
     "react-helmet": "^6.1.0",
     "react-router-dom": "^6.8.1",
     "react-scripts": "^5.0.1",
-    "web-vitals": "^2.1.4"
+    "web-vitals": "^3.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "react-scripts test --transformIgnorePatterns \"node_modules/(?!bsf)/\" --env=jsdom",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
@@ -46,6 +46,7 @@
     ]
   },
   "devDependencies": {
-    "jest": "^27.5.1"
+    "@babel/plugin-transform-modules-commonjs": "^7.12.13",
+    "babel-jest": "^26.6.3"
   }
 }
