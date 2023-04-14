@@ -12,8 +12,8 @@ exports.getRaces = (request, response) => {
                 races.push({
                     RaceId: doc.id,
                     Name: doc.data().RaceName,
-                    StartDate: doc.data().StartDate
-
+                    StartDate: doc.data().StartDate,
+                    VolunteerDays: doc.data().VolunteerDays,
                 });
             });
             return response.json(races);
@@ -21,8 +21,7 @@ exports.getRaces = (request, response) => {
 }
 
 exports.getRace = (request, response) => {
-    raceId = request.params.raceId
-    console.log("RaceID: " + raceId)
+    const raceId = request.params.raceId
 
     db.collection('Races').doc(raceId).get().then(
         (doc) => {
@@ -35,6 +34,35 @@ exports.getRace = (request, response) => {
             return response.json(data);
         })
 }
+
+exports.updateRace = async (request, respones) => {
+    vdays = []
+    request.params.volunteerDays.forEach((dt) => {
+        vdays.push(new Date(dt))
+    })
+    const raceData = {
+        RaceName: request.body.raceName,
+        StartDate: Timestamp.fromDate(new Date(request.body.startDate)),
+        VolunteerDays: vdays,
+    }
+
+    ref = db.collection('Races').doc(request.params.raceId);
+    const res = await ref.update(raceData)
+    return response.json({ raceId: res.id })
+}
+
+exports.updateVolunteerDates = async () => {
+    const vdates = request.body.volunteerDays;
+    vdates.map((dt) => {
+        return new Timestamp.fromDate(new Date(dt))
+    })
+
+    ref = db.collection('Races').doc(request.body.volunteerDays);
+    const res = await ref.update({VolunteerDays: vdates})
+    return response.json({ raceId: res.id })
+
+}
+
 
 exports.getVolunteerPositions = async (request, response) => {
     raceId = request.params.raceId
@@ -73,6 +101,7 @@ exports.createRace = async (request, response) => {
 
     return response.json({ raceId: res.id })
 }
+
 
 exports.emailVouchers = async (request, response) => {
     const firstName = request.body.firstName;

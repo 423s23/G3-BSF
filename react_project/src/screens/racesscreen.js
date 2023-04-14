@@ -1,4 +1,5 @@
 import axios from 'axios';
+import {Race, getRaces} from "../models/racemodel" ;
 import { useEffect, useState } from "react";
 import { useOutletContext } from "react-router-dom";
 
@@ -28,7 +29,7 @@ export default function RacesScreen() {
 
   const [data, setData] = useState([]);
 
-  useEffect(() => {
+  /* useEffect(() => {
     axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races')
       .then(function (response) {
         setData(response.data)
@@ -38,6 +39,20 @@ export default function RacesScreen() {
         console.log(error);
         setData("There was an error: " + error)
       })
+  }, []) */
+
+  useEffect(() =>  {
+    console.log("useEffect: calling getRaces()")
+
+    const getData = async () => {
+      const data = await getRaces()
+      console.log(data)
+      setData(data)
+    }
+
+    getData().catch(console.error)
+
+  
   }, [])
 
 

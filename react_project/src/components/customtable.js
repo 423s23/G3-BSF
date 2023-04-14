@@ -17,6 +17,8 @@ import KeyboardArrowRight from '@mui/icons-material/KeyboardArrowRight';
 import LastPageIcon from '@mui/icons-material/LastPage';
 import { Link } from 'react-router-dom';
 
+import { Race } from "../models/racemodel"
+
 
 function TablePaginationActions(props) {
   const theme = useTheme();
@@ -83,7 +85,7 @@ TablePaginationActions.propTypes = {
 //main display
 export default function CustomTable(props) {
   //this will be list with each element containing raceId, raceName, and raceStartDate 
-  let rows = props.raceData;
+  let races = props.raceData;
 
 
   const [page, setPage] = React.useState(0);
@@ -91,7 +93,7 @@ export default function CustomTable(props) {
 
   // Avoid a layout jump when reaching the last page with empty rows.
   const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - rows.length) : 0;
+    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - races.length) : 0;
 
   const handleChangePage = (event, newPage) => {
     setPage(newPage);
@@ -106,21 +108,18 @@ export default function CustomTable(props) {
     <TableContainer component={Paper}>
       <Table sx={{ minWidth: 500 }} >
         <TableBody>
-          {(rowsPerPage > 0
-            ? rows.slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-            : rows
-          ).map((row) => (
-            <TableRow key={row.RaceId}>
-              <Link to={`/race/${row.RaceId}`} >
+          {races.map((race) => (
+            <TableRow key={race.raceId}>
+              <Link to={`/race/${race.raceId}`} >
 
                 <TableCell component="th" scope="row">
-                  {row.Name}
+                  {race.raceName}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="right">
-                  {Date(row.StartDate.seconds)}
+                  {race.startDate.toDateString()}
                 </TableCell>
                 <TableCell style={{ width: 160 }} align="right">
-                  {row.RaceId}
+                  {race.raceId}
                 </TableCell>
               </Link>
             </TableRow>
@@ -137,7 +136,7 @@ export default function CustomTable(props) {
             <TablePagination
               rowsPerPageOptions={[5, 10, 25, { label: 'All', value: -1 }]}
               colSpan={3}
-              count={rows.length}
+              count={races.length}
               rowsPerPage={rowsPerPage}
               page={page}
               SelectProps={{

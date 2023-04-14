@@ -8,16 +8,23 @@ import DateChipArray from '../components/datechiparray';
 
 import { useLoaderData } from "react-router-dom";
 
+import { getRace, Race } from '../models/racemodel';
+
 export async function loader({ params }) {
-    const raceId = params.raceId
-    return raceId;
+    let race = new Race();
+    race = getRace(params.raceId)
+    return race;
 }
 
 
 export default function RaceDetailScreen() {
-    const raceId = useLoaderData();
+    const [race, updateRace] = useState(useLoaderData());
 
-    const [appBarTitle, setTitle] = useOutletContext();
+    const [appBarTitle, setTitle] = useOutletContext(race.raceName);
+
+    const addVolunteerDate = function(){
+        console.log("Adding new volunteer day!")
+    }
 
     const openCheckInScreen = function(){
         console.log("launching check in screen!")
@@ -26,7 +33,7 @@ export default function RaceDetailScreen() {
     const sendTestEmail = function () {
         console.log("sending email")
         axios.post(
-            "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/" + raceId + "/emailvouchers",
+            "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/" + race.raceId + "/emailvouchers",
             {
                 firstName: "testMichael",
                 lastName: "testBuffington",
@@ -45,38 +52,11 @@ export default function RaceDetailScreen() {
 
 
 
-    const [raceData, setRaceData] = useState([]);
 
-    useEffect(() => {
-        axios.get(`https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/${raceId}`)
-            .then(function (response) {
-                const data = response.data
-                data.StartDate = new Date(data.StartDate._seconds)
-                const vdates = []
-                data.VolunteerDays.forEach(
-                    (day) => {
-
-                        var d = new Date(day._seconds*1000)
-                        console.log(d)
-                        console.log(typeof d)
-                        vdates.push(d)
-                    }
-                )
-                data.VolunteerDays = vdates
-                setRaceData(data)
-                setTitle(data.Name)
-
-            })
-            .catch(function (error) {
-                // handle error
-                console.log(error);
-                setRaceData("There was an error: " + error)
-            })
-    }, [])
 
     const [positionData, setPositionData] = useState([]);
     useEffect(() => {
-        axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/' + raceId + "/positions")
+        axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/' + race.raceId + "/positions")
             .then(function (response) {
                 setPositionData(response.data)
             })
@@ -90,14 +70,20 @@ export default function RaceDetailScreen() {
     return (
         <Container>
             <Stack>
-                chip array for dates
-                <DateChipArray dates={raceData.VolunteerDays}/> 
-                <Divider >
-                </Divider>
-                <p>
-                    list of positions with who is signed up
-                </p>
-                {JSON.stringify(raceData, null, 2)}
+                <DateChipArray 
+                    dates={race.volunteerDays}
+                    addDateHandler={addVolunteerDate}
+                    /> 
+                <Divider />
+                <h3>
+                    {race.raceName}
+                </h3>
+                <ol>
+                    <li>{race.raceId}</li>
+                    <li>{race.startDate.toDateString()}</li>
+                </ol>
+
+
                 <Divider />
                 <Button
                     variant="contained"

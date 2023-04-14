@@ -1,8 +1,8 @@
-import dotenv from 'dotenv'
+const dotenv = require('dotenv');
+const nodemailer = require('nodemailer')
+
 dotenv.config()
 
-import express  from 'express'
-const app = express()
 
 //smtp credentials
 const hostname = process.env.HOSTNAME
