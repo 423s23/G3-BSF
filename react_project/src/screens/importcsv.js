@@ -4,7 +4,8 @@ import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-
+import Button from '@mui/material/Button';
+import Stack from '@mui/material/Stack';
 
 export default function ImportCSV(){
     
@@ -65,17 +66,11 @@ export default function ImportCSV(){
       >
         <div style={{ textAlign: "center" }}>
         <h1>Import Ski Codes </h1>
-        <form>
-            <input
-            type={"file"}
-            name={"file"}
-            accept=".xlsx, .xls, .csv"
-            onChange={changeHandler}
-            style={{ display: "block", margin: "10px auto" }}
-            />
-
-        </form>
-
+        <Button variant="contained" component="label">
+            Import Codes
+            <input hidden  accept=".xlsx, .xls, .csv" multiple type="file"  onChange={changeHandler}/>
+        </Button>
+        <br />
         <br />
 
         <div style={{height: 400, width: 'auto'}}>
@@ -90,7 +85,11 @@ export default function ImportCSV(){
         </div>
 
         <br />
-        
+        <br />
+        <Button variant="contained" component="label">
+            Upload Codes
+        </Button>
+
         </div>
         </Box>
     </Container>
