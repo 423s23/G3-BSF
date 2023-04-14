@@ -120,7 +120,11 @@ function ContactInfo(){
             </Container>
         </ThemeProvider>
     );
+
 }
+
+//export {ContactInfo}
+
 
 function StepperFunction(){
     const steps = ['Contact Info', 'Position', 'Waiver', 'Submit'];
