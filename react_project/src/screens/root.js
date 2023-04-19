@@ -47,7 +47,7 @@ export default function Root() {
                 open={drawerState}
                 onClose={() => handleDrawer()}
             >
-                <Stack direction="column" alignItems="left" gap={1}>
+                <Stack direction="column" alignItems="left" gap={0.25}>
                         <Button variant="contained" component={Link} to={'races'}>
                             Races
                         </Button>
