@@ -12,6 +12,7 @@ import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
+import CreateAdminScreen from "./screens/createAdminScreen";
 
 
 
@@ -50,6 +51,10 @@ function App() {
         {
           path: "adminlogin",
           element: <AdminLoginScreen />
+        },
+        {
+          path: "createadmin",
+          element: <CreateAdminScreen />
         },
         {
           path: "help",

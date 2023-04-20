@@ -1,0 +1,7 @@
+{
+  "name": "G3-BSF",
+  "version": "1.0.0",
+  "devDependencies": {
+    "@testing-library/react": "^14.0.0"
+  }
+}

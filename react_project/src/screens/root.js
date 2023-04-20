@@ -36,10 +36,10 @@ export default function Root() {
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         {appBarTitle}
+
                     </Typography>
                 </Toolbar>
             </AppBar>
-
             <Drawer
                 anchor="left"
                 open={drawerState}
@@ -53,6 +53,7 @@ export default function Root() {
                     <Link to={`volunteers`}> <ListItemButton>Volunteers</ListItemButton></Link>
                     <Link to={`races`}><ListItemButton> Races </ListItemButton></Link>
                     <Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>
+                    <Link to={`createadmin`}><ListItemButton> Create Admin </ListItemButton></Link>
                     <Link to={'help'}><ListItemButton>Help</ListItemButton></Link>
 
                 </List>
