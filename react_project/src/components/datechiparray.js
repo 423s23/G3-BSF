@@ -25,9 +25,8 @@ const printableDate = function (d) {
     return res;
 }
 
-export default function DateChipArray(props) {
+export default function DateChipArray({dates, addDateHandler}) {
 
-    const { dates, addDateHandler } = props;
 
 
     const [focus, setfocus] = useState(0)
@@ -73,7 +72,7 @@ export default function DateChipArray(props) {
     );
 }
 
-function NewDateChip(addDateHandler) {
+function NewDateChip({addDateHandler}) {
     const [open, handleOpen] = useState(false)
     const [anchorEl, setAnchorEl] = useState(null);
     const [date, setDate] = useState(null)
@@ -128,10 +127,7 @@ function NewDateChip(addDateHandler) {
                     >
                         Add
                     </Button>
-
                 </Stack>
-
-
             </Popover>
 
         </ListItem>

@@ -22,8 +22,8 @@ export default function RaceDetailScreen() {
 
     const [appBarTitle, setTitle] = useOutletContext(race.raceName);
 
-    const addVolunteerDate = function(){
-        console.log("Adding new volunteer day!")
+    const addVolunteerDate = function(dt){
+        race.addVolunteerDate(dt)
     }
 
     const openCheckInScreen = function(){

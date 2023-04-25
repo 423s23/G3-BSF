@@ -32,8 +32,7 @@ export default function NewRacePopup(props) {
     }
 
     function submitNewRace() {
-        console.log("New Race!")
-        console.log(name + " on " + startDate)
+
         //validate name and date
 
         //send POST request

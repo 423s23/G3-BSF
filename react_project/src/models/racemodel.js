@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { RacePositionModel } from './racepositionmodel';
 
 export class Race {
 
@@ -8,31 +9,54 @@ export class Race {
         this.startDate = startDate;
         this.volunteerDays = volunteerDays;
     }
+
+    _updateRace = function() {
+
+        const res = axios.post(
+            "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/"+ this.RaceId + "/update",
+            {
+                raceName: this.raceName,
+                startDate: this.startDaxte,
+                VolunteerDays: this.volunteerDays,
+            },
+         ).then((res) => {
+            //do something
+         })
+
+    }
+    
     // get race position objects and check in objects
-    // alt param: specific date
     getVolunteerPositions = function () {
+        const res = axios.get("https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/"+ this.RaceId + "/positions")
+        const data = res.data
+        const positions = []
+
+        data.forEach((pos) => {
+            positions.push(new RacePositionModel(
+                pos.PositionId,
+                pos.PositionName,
+                pos.RaceId,
+                pos.Description, 
+                new Date(pos.StartTime._seconds * 1000),
+                new Date(pos.EndTime._seconds * 1000), 
+                pos.VolunteersNeeded,
+                pos.LicenseRequired,
+                pos.LicenseName
+            ))
+        })
+        return positions;
     }
 
     //add race day (or array of dates)?
     addRaceDay = function (date) {
      console.log("adding race day " + date.toDateString())   
+     this.volunteerDays.push(date)
+
+     this._updateRace()
     }
 
-    // remove race day ticker
-    deleteRaceDay = function (date) {
-        // check if there are any race positions before deleting
-    }
 
-    //add volunteerPosition
-    addVolunteerPosition() {
 
-    }
-
-    deleteVolunteerPosition() {
-
-    }
-
-    edit
 
 }
 
@@ -43,10 +67,12 @@ export async function getRaces() {
         const races = []
 
         data.forEach((r) => {
+            let vdates = []
             races.push(new Race(
                 r.Name,
                 r.RaceId,
-                new Date(r.StartDate._seconds * 1000)))
+                new Date(r.StartDate._seconds * 1000)),
+                )
         })
         return races
     }
@@ -68,8 +94,6 @@ export async function getRace(raceId) {
             (day) => {
 
                 var d = new Date(day._seconds * 1000)
-                console.log(d)
-                console.log(typeof d)
                 vdates.push(d)
             }
         )
@@ -89,4 +113,3 @@ export async function getRace(raceId) {
     }
 
 }
-

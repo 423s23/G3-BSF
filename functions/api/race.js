@@ -35,7 +35,7 @@ exports.getRace = (request, response) => {
         })
 }
 
-exports.updateRace = async (request, respones) => {
+exports.updateRace = async (request, response) => {
     vdays = []
     request.params.volunteerDays.forEach((dt) => {
         vdays.push(new Date(dt))
@@ -58,32 +58,40 @@ exports.updateVolunteerDates = async () => {
     })
 
     ref = db.collection('Races').doc(request.body.volunteerDays);
-    const res = await ref.update({VolunteerDays: vdates})
+    const res = await ref.update({ VolunteerDays: vdates })
     return response.json({ raceId: res.id })
 
 }
 
 
-exports.getVolunteerPositions = async (request, response) => {
-    raceId = request.params.raceId
-    db.collection("RacePositions").where("RaceId", "==", raceId).get().then(
-        (data) => {
-            let positions = [];
-            data.forEach((doc) => {
-                positions.push({
-                    PositionId: doc.id,
-                    PositionDescriptionId: doc.data().PositionDescriptionId,
-                    RaceId: doc.data().RaceId,
-                    StartTime: doc.data().PositionStartTime,
-                    EndTime: doc.data().PositionEndTime,
-                    VolunteersNeeded: doc.data().VolunteersNeeded,
-                    RegisteredVolunteers: doc.data().RegisteredVolunteers,
-                });
+exports.getVolunteerPositions = (request, response) => {
+    const raceId = request.params.raceId
+
+    db.collection("RacePositions").where("RaceId", "==", raceId).get().then((data) => {
+        let positions = [];
+
+        data.forEach((doc) => {
+            positions.push({
+                PositionId: doc.id,
+                PositionDescriptionId: doc.data().PositionDescriptionId,
+                RaceId: doc.data().RaceId,
+                StartTime: doc.data().PositionStartTime,
+                EndTime: doc.data().PositionEndTime,
+                VolunteersNeeded: doc.data().VolunteersNeeded,
+                PositionName: doc.data().PositionName,
+                Description: doc.data().Description,  
+                LicenseRequired: doc.data().LicenseRequired,
+                LicenseName: doc.data().LicenseName,              
             });
-            return response.json(positions);
-        }
-    )
+        });
+        return response.json(positions);
+    })
 }
+
+exports.addVolunteerPositions = (request, response) => {
+    
+}
+
 
 
 exports.createRace = async (request, response) => {

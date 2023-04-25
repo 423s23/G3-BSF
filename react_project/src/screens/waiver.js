@@ -1,7 +1,7 @@
 
 import * as React from 'react';
 
-export default function PositionPicker() {
+export default function Waiver() {
 
     return(
         <div>

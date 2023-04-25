@@ -1,13 +1,11 @@
 
-import * as React from 'react';
 import axios from 'axios';
-import { useEffect, useState } from "react";
-import { createTheme} from '@mui/material/styles';
+import { useEffect, useState, useRef} from "react";
 import Box from '@mui/material/Box';
 import { DataGrid } from '@mui/x-data-grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
-const theme = createTheme();
+
 const columns = [
 
   { field: 'pos', headerName: 'Position', width: 130 },
@@ -25,15 +23,17 @@ const columns = [
 // ];
 
 
-export default function PositionPicker() {
-  const cellClickRef = React.useRef(null);
-  const [selectionModel, setSelectionModel] = React.useState([]);
+export default function PositionPicker( updateSelectedPosition) {
+  const cellClickRef = useRef(null);
+  const [selectionModel, setSelectionModel] = useState([]);
   const RaceId = "hhIyHeFAC7HiyoHhf6Qi"
   const [PositionData, setPositionData] = useState([]);
+
   useEffect(() => {
     axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/' + RaceId + "/positions")
       //axios.get('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/abstractPositions/')
       .then(function (response) {
+        console.log(response.data)
         setPositionData(response.data)
       })
       .catch(function (error) {
@@ -55,7 +55,6 @@ export default function PositionPicker() {
 
   return (
     <Container component="main" maxWidth="xs">
-      <CssBaseline />
       <Box
         sx={{
           marginTop: 8,
@@ -66,32 +65,11 @@ export default function PositionPicker() {
         }}
       >
         <div style={{ height: 400, width: '190%' }}>
-          <DataGrid
-            getRowHeight={() => 'auto'}
-            rows={testRow}
-            columns={columns}
-            pageSize={5}
-            checkboxSelection
-            rowsPerPageOptions={[5]}
-            hideFooterSelectedRowCount={true}
-            selectionModel={selectionModel}
-            onCellClick={() => (cellClickRef.current = true)}
-            onSelectionModelChange={(selection, detail) => {
-              if (cellClickRef.current) {
-                if (selection.length > 1) {
-                  const selectionSet = new Set(selectionModel);
-                  const result = selection.filter((s) => !selectionSet.has(s));
-
-                  setSelectionModel(result);
-                } else {
-                  setSelectionModel(selection);
-                }
-              } else {
-                setSelectionModel(selection);
-              }
-              cellClickRef.current = null;
-            }}
+          <DataGrid 
+            columns={["Name", "ID", "another"]}
+            rows={PositionData}
           />
+
         </div>
       </Box>
       <p>
@@ -99,8 +77,32 @@ export default function PositionPicker() {
       </p>
 
     </Container>
-
-            
-
   );
 }
+
+
+/*{ <DataGrid
+getRowHeight={() => 'auto'}
+rows={testRow}
+columns={columns}
+pageSize={5}
+checkboxSelection
+rowsPerPageOptions={[5]}
+hideFooterSelectedRowCount={true}
+selectionModel={selectionModel}
+onCellClick={() => (cellClickRef.current = true)}
+onSelectionModelChange={(selection, detail) => {
+  if (cellClickRef.current) {
+    if (selection.length > 1) {
+      const selectionSet = new Set(selectionModel);
+      const result = selection.filter((s) => !selectionSet.has(s));
+
+      setSelectionModel(result);
+    } else {
+      setSelectionModel(selection);
+    }
+  } else {
+    setSelectionModel(selection);
+  }
+  cellClickRef.current = null;
+} /> }*/
