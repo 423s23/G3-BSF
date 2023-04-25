@@ -11,26 +11,25 @@ import { auth } from "../firebase"
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import {useState} from "react";
-import AuthDetails from "../authDetails";
 
 export default function AdminLoginScreen() {
 
-    const [email, setEmail] = useState("");
-    const [password, setPassword] = useState("");
+    const [loginEmail, setLoginEmail] = useState("");
+    const [loginPassword, setLoginPassword] = useState("");
 
-    const signIn = () => {
-
-        signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                console.log(userCredential);
-                console.log("what");
-
-            })
-            .catch((error) => {
-                //console.log(error);
-                console.log("fail");
-            });
+    const login = async () => {
+        try {
+            const user = await signInWithEmailAndPassword(
+                auth,
+                loginEmail,
+                loginPassword
+            );
+            console.log(user);
+        } catch (error) {
+            console.log(error.message);
+        }
     };
+
 
     return (
             <Container component="main" maxWidth="xs">
@@ -63,8 +62,7 @@ export default function AdminLoginScreen() {
                             name="email"
                             autoComplete="email"
                             autoFocus
-                            value = {email}
-                            onChange = {(e) => setEmail(e.target.value)}
+                            onChange = {(e) => setLoginEmail(e.target.value)}
                         />
 
                         {/*code for password */}
@@ -77,25 +75,21 @@ export default function AdminLoginScreen() {
                             type="password"
                             id="password"
                             autoComplete="current-password"
-                            value = {password}
-                            onChange = {(e) => setPassword(e.target.value)}
+                            onChange = {(e) => setLoginPassword(e.target.value)}
                         />
 
                         {/*code for sign in button*/}
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={signIn()}
+                            onClick={login}
 
                         >
                             Sign In
                         </Button>
 
-                    <AuthDetails>
 
-                    </AuthDetails>
 
                     </Box>
                 </Box>
