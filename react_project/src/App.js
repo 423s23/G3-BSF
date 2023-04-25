@@ -13,6 +13,7 @@ import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailsc
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
 import ImportCSV from "./screens/importcsv";
+import CreateAdminScreen from "./screens/createAdminScreen";
 
 
 
@@ -55,6 +56,10 @@ function App() {
         {
           path: "adminlogin",
           element: <AdminLoginScreen />
+        },
+        {
+          path: "createadmin",
+          element: <CreateAdminScreen />
         },
         {
           path: "help",
