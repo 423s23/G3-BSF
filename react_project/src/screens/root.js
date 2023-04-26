@@ -57,12 +57,6 @@ export default function Root() {
                         <Button variant="contained" component={Link} to={'checkin'}>
                             Check In Screen
                         </Button>
-                        <Button variant="contained" component={Link} to={'editvolunteers'}>
-                            Edit Registered Volunteers
-                        </Button>
-                        <Button variant="contained" component={Link} to={'volunteers'}>
-                            Volunteers
-                        </Button>
                         <Button variant="contained" component={Link} to={'adminlogin'}>
                             Admin Login
                         </Button>

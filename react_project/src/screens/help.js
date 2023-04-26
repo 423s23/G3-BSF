@@ -9,10 +9,11 @@ export default function Help(){
             <p>
                  - To register a volunteer go to the 'CheckInScreen' page.
             </p>
-            <h3>Edit Volunteer</h3>
+            <h3>Edit / Remove Volunteer</h3>
             <p>
-                - To edit the volunteer list to delete, move around, or change something: go to the 'editRegisteredVolunteers' page.
-                - Then click on the 'EDIT' button below the table to make the changes.
+                - To edit the volunteer list to delete, move around, or change something: go to the 'Races' page.<br></br>
+                - Then, go to the race that the volunteer was registered for<br></br>
+                - Clicking on their name will open a menu where you can edit the volunteer
             </p>
             <h3>Create and View Races</h3>
             <p> 

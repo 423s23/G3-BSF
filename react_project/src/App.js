@@ -6,9 +6,7 @@ import {
 import Root from "./screens/root"
 import SeriesDetailScreen from "./screens/seriesdetailscreen"
 import CheckInScreen from "./screens/checkinscreen"
-import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
-import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
@@ -39,14 +37,6 @@ function App() {
         {
           path: "checkin",
           element: <CheckInScreen />,
-        },
-        {
-          path: "editvolunteers",
-          element: <EditRegisteredVolunteers />
-        },
-        {
-          path: "volunteers",
-          element: <VolunteerScreen />
         },
         {
           path: "adminlogin",
