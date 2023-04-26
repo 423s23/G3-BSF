@@ -5,6 +5,10 @@ import { DataGrid} from '@mui/x-data-grid';
 import CssBaseline from '@mui/material/CssBaseline';
 import Container from '@mui/material/Container';
 import Button from '@mui/material/Button';
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../firebase";
 
 
 const edit = (Selection) => {
@@ -27,6 +31,18 @@ const rows = [
 
 
 export default function PositionPicker() {
+
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+    }, [])
+
 const cellClickRef = React.useRef(null);
 const [selectionModel, setSelectionModel] = React.useState([]);
   return (
@@ -80,6 +96,11 @@ const [selectionModel, setSelectionModel] = React.useState([]);
             </Box>
         </React.Fragment>
         </Box>
+
+            <Box>
+                {user ? "" : navigate("/adminlogin")}
+            </Box>
+
         </Container>
         
       

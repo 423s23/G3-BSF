@@ -11,14 +11,18 @@ import { auth } from "../firebase"
 import { createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 
 import {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 export default function CreateAdminScreen() {
 
     const [registerEmail, setRegisterEmail] = useState("");
     const [registerPassword, setRegisterPassword] = useState("");
 
+
     // This section below helps display if a user is logged in and gives us functionality to sign out
     //--------------------
+
+    const navigate = useNavigate();
 
     const [user, setUser] = useState({});
 
@@ -28,10 +32,6 @@ export default function CreateAdminScreen() {
         });
 
     }, [])
-
-    const logout = async () => {
-        await signOut(auth);
-    };
 
     //--------------------
 
@@ -102,11 +102,13 @@ export default function CreateAdminScreen() {
                         Create Account
                     </Button>
 
-                    <Button onClick={logout}> Sign Out </Button>
 
-                    {/*This code displays the current user that is logged in or it tells us that no one is logged in*/}
+                    {/*This code displays the current user that is logged in or redirects you to login page*/}
                     <Box>
-                        {user ? user.email : "Not Logged In"}
+                        {/*use this one below for the sign out page*/}
+                        {/*{user ? user.email : "Not Logged In"}*/}
+                        {user ? "" : navigate("/adminlogin")}
+
                     </Box>
 
                 </Box>

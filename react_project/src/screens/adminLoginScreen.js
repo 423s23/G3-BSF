@@ -9,13 +9,17 @@ import Container from '@mui/material/Container';
 
 import { auth } from "../firebase"
 import { signInWithEmailAndPassword } from "firebase/auth";
-
 import {useState} from "react";
+import { useNavigate } from "react-router-dom";
+import Root from "./root";
+
 
 export default function AdminLoginScreen() {
 
     const [loginEmail, setLoginEmail] = useState("");
     const [loginPassword, setLoginPassword] = useState("");
+
+    const navigate = useNavigate();
 
     const login = async () => {
         try {
@@ -24,6 +28,7 @@ export default function AdminLoginScreen() {
                 loginEmail,
                 loginPassword
             );
+            navigate("/races");
             console.log(user);
         } catch (error) {
             console.log(error.message);
@@ -32,8 +37,8 @@ export default function AdminLoginScreen() {
 
 
     return (
-            <Container component="main" maxWidth="xs">
 
+            <Container component="main" maxWidth="xs">
                 <Box
                     sx={{
                         marginTop: 8,
@@ -41,8 +46,6 @@ export default function AdminLoginScreen() {
                         flexDirection: 'column',
                         alignItems: 'center',
                     }}
-
-
                 >
                     <Avatar sx={{ m: 1, bgcolor: 'secondary.main' }}>
 
@@ -89,10 +92,9 @@ export default function AdminLoginScreen() {
                             Sign In
                         </Button>
 
-
-
                     </Box>
                 </Box>
             </Container>
+
     );
 }

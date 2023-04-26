@@ -1,7 +1,8 @@
 import React from "react";
 import {
-  createBrowserRouter,
-  RouterProvider,
+  BrowserRouter,
+  createBrowserRouter, Route,
+  RouterProvider, Routes,
 } from "react-router-dom";
 import Root from "./screens/root"
 import SeriesDetailScreen from "./screens/seriesdetailscreen"
@@ -13,6 +14,7 @@ import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailsc
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
 import CreateAdminScreen from "./screens/createAdminScreen";
+import LogOut from "./screens/logout";
 
 
 
@@ -65,7 +67,26 @@ function App() {
   ]);
 
   return (
-    <RouterProvider router={router} />
+
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Root />}>
+            <Route index element={<AdminLoginScreen />} />
+            <Route path="races" element={<RacesScreen />} />
+            <Route path="series" element={<SeriesDetailScreen />} />
+            <Route path="checkin" element={<CheckInScreen />} />
+            <Route path="editvolunteers" element={<EditRegisteredVolunteers />} />
+            <Route path="volunteers" element={<VolunteerScreen />} />
+            <Route path="adminlogin" element={<AdminLoginScreen />} />
+            <Route path="createadmin" element={<CreateAdminScreen />} />
+            <Route path="help" element={<Help />} />
+            <Route path="logout" element={<LogOut />} />
+          </Route>
+        </Routes>
+      </BrowserRouter>
+
+    // <RouterProvider router={router} />
+
   );
 }
 

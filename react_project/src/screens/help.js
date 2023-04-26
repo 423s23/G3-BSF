@@ -1,6 +1,25 @@
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../firebase";
+import Box from "@mui/material/Box";
+import * as React from "react";
 
 
 export default function Help(){
+
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+    }, [])
+    const [data, setData] = useState([]);
+
     return(
         <div>
             <h1>Help Page</h1>
@@ -32,6 +51,11 @@ export default function Help(){
                 <li>Pretty(ish) looking pages</li>
                 <li>Waiver Working</li>
             </ul>
+
+            <Box>
+                {user ? "" : navigate("/adminlogin")}
+            </Box>
+
         </div>
     );
 }

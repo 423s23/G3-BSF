@@ -13,6 +13,10 @@ import MenuItem from '@mui/material/MenuItem';
 
 import PositionPicker from './positionPicker.js';
 import Waiver from './waiver.js';
+import {useNavigate} from "react-router-dom";
+import {useEffect, useState} from "react";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../firebase";
 
 
 const currencies = [
@@ -32,6 +36,8 @@ const currencies = [
 
 ];
 
+
+
 export default function CheckInScreen() {
 
     return (
@@ -43,6 +49,18 @@ export default function CheckInScreen() {
 }
 
 function ContactInfo(){
+
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+    }, [])
+
     return (
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
@@ -110,6 +128,10 @@ function ContactInfo(){
                                 </MenuItem>
                             ))}
                         </TextField>
+
+                        <Box>
+                            {user ? "" : navigate("/adminlogin")}
+                        </Box>
                         
                     </Box>
                 </Box>

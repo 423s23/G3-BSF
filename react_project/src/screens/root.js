@@ -5,7 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Container, CssBaseline, Drawer, List, ListItemButton } from '@mui/material';
 import { useState } from 'react';
-import { Link, Outlet } from 'react-router-dom'
+import {Link, Navigate, Outlet} from 'react-router-dom'
 import Palette from './Palette'
 
 export default function Root() {
@@ -18,9 +18,11 @@ export default function Root() {
         toggleDrawer(!drawerState);
     }
 
+
     return (
         <Palette>
         <Container component="main" maxWidth="false" disableGutters="true">
+
             <CssBaseline />
             <AppBar position="static">
                 <Toolbar>
@@ -38,6 +40,7 @@ export default function Root() {
                         {appBarTitle}
 
                     </Typography>
+
                 </Toolbar>
             </AppBar>
             <Drawer
@@ -52,9 +55,10 @@ export default function Root() {
                     <Link to={`editvolunteers`}><ListItemButton>editRegisteredVolunteers</ListItemButton></Link>
                     <Link to={`volunteers`}> <ListItemButton>Volunteers</ListItemButton></Link>
                     <Link to={`races`}><ListItemButton> Races </ListItemButton></Link>
-                    <Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>
+                    {/*<Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>*/}
                     <Link to={`createadmin`}><ListItemButton> Create Admin </ListItemButton></Link>
                     <Link to={'help'}><ListItemButton>Help</ListItemButton></Link>
+                    <Link to={'logout'}><ListItemButton>Log Out</ListItemButton></Link>
 
                 </List>
 
@@ -63,9 +67,10 @@ export default function Root() {
                 < Outlet context={[appBarTitle, setTitle]} />
             </Container>
 
-
         </Container>
+
         </Palette>
+
 
     )
 

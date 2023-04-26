@@ -1,14 +1,29 @@
 import axios from 'axios';
 import { useEffect, useState } from "react";
-import { useOutletContext } from "react-router-dom";
+import {useNavigate, useOutletContext} from "react-router-dom";
 
 
 import CustomTable from '../components/customtable';
 import NewRacePopup from '../components/newracepopup'
 
 import Button from "@mui/material/Button";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../firebase";
+import Box from "@mui/material/Box";
+import * as React from "react";
 
 export default function RacesScreen() {
+
+    const navigate = useNavigate();
+
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        });
+
+    }, [])
 
   const [appBarTitle, setTitle] = useOutletContext();
 
@@ -65,6 +80,9 @@ export default function RacesScreen() {
         open={show}
         onClose={handleClose}
       />
+        <Box>
+            {user ? "" : navigate("/adminlogin")}
+        </Box>
 
 
     </div>
