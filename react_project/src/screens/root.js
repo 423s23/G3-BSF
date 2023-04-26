@@ -38,10 +38,10 @@ export default function Root() {
                     </IconButton>
                     <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
                         {appBarTitle}
+
                     </Typography>
                 </Toolbar>
             </AppBar>
-
             <Drawer
                 anchor="left"
                 open={drawerState}
@@ -65,6 +65,9 @@ export default function Root() {
                         </Button>
                         <Button variant="contained" component={Link} to={'adminlogin'}>
                             Admin Login
+                        </Button>
+                        <Button variant="contained" component={Link} to={'createadmin'}>
+                            Create Admin
                         </Button>
                         <Button variant="contained" component={Link} to={'help'}>
                             Help
