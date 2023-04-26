@@ -5,7 +5,7 @@ import {
 } from "react-router-dom";
 import Root from "./screens/root"
 import SeriesDetailScreen from "./screens/seriesdetailscreen"
-import CheckInScreen from "./screens/checkinscreen"
+import CheckInScreen, {loader as CheckinLoader} from "./screens/checkinscreen"
 import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
 import VolunteerScreen from "./screens/volunteersscreen";
@@ -30,15 +30,16 @@ function App() {
         {
           path: "race/:raceId",
           element: <RaceDetailScreen />,
-          loader: RaceIdLoader
+          loader: RaceIdLoader,
         },
         {
           path: "series",
           element: <SeriesDetailScreen />,
         },
         {
-          path: "checkin",
+          path: "checkin/:raceId/:date",
           element: <CheckInScreen />,
+          loader: CheckinLoader,
         },
         {
           path: "editvolunteers",

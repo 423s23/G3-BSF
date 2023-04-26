@@ -1,7 +1,5 @@
-import { Box, Card, CardActions, CardContent, CardHeader, Collapse, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack } from '@mui/material';
-import TextField from '@mui/material/TextField';
+import { Button, TextField, Collapse, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Stack } from '@mui/material';
 import axios from 'axios';
-import Button from '@mui/material/Button';
 import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 
 import { useState } from 'react';
@@ -55,7 +53,6 @@ export default function NewRacePopup(props) {
                 closePopup()
             }
         )
-
     }
 
 

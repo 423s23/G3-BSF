@@ -1,5 +1,5 @@
 const { db } = require('../util/admin');
-const { Timestamp } = require('firebase-admin/firestore');
+const { Timestamp, FieldValue } = require('firebase-admin/firestore');
 const { generateVoucherMessage, sendMail } = require('./emailing.js')
 
 
@@ -22,7 +22,7 @@ exports.getRaces = (request, response) => {
 
 exports.getRace = (request, response) => {
     raceId = request.params.raceId
-    console.log("RaceID: " + raceId)
+    console.log("getRace called - RaceID: " + raceId)
 
     db.collection('Races').doc(raceId).get().then(
         (doc) => {
@@ -38,18 +38,23 @@ exports.getRace = (request, response) => {
 
 exports.getVolunteerPositions = async (request, response) => {
     raceId = request.params.raceId
+    console.log("getVolunteerPositions called - RaceID: " + raceId)
+
     db.collection("RacePositions").where("RaceId", "==", raceId).get().then(
         (data) => {
             let positions = [];
             data.forEach((doc) => {
                 positions.push({
-                    PositionId: doc.id,
-                    PositionDescriptionId: doc.data().PositionDescriptionId,
-                    RaceId: doc.data().RaceId,
-                    StartTime: doc.data().PositionStartTime,
-                    EndTime: doc.data().PositionEndTime,
-                    VolunteersNeeded: doc.data().VolunteersNeeded,
-                    RegisteredVolunteers: doc.data().RegisteredVolunteers,
+                    positionId: doc.id,
+                    raceId: doc.data().RaceId,
+                    positionName: doc.data().PositionName,
+                    desciption: doc.data().Description,
+                    startTime: doc.data().PositionStartTime,
+                    endTime: doc.data().PositionEndTime,
+                    licenseRequired: doc.data().LicenseRequired,
+                    licenseName: doc.data().LicenseName,
+                    volunteersNeeded: doc.data().VolunteersNeeded,
+                    registeredVolunteers: doc.data().RegisteredVolunteers,
                 });
             });
             return response.json(positions);
@@ -57,10 +62,58 @@ exports.getVolunteerPositions = async (request, response) => {
     )
 }
 
+exports.addVolunteerPosition = async (request, response) => {
+    raceId = request.params.raceId
+    console.log("getVolunteerPositions called - RaceID: " + raceId)
+    
+    const res = db.collection("RacePositions").add({
+        PositionId: request.body.positionId,
+        RaceId: request.body.raceId,
+        PositionName: request.body.positionName,
+        PositionDescription: request.body.positionDescription,
+        VolunteersNeeded: request.body.volunteersNeeded,
+        LicenseName: request.body.licenseName,
+        LicenseRequired: request.body.licenseRequired,
+        PositionStartTime: Timestamp.fromDate(new Date(request.body.startDateTime)),
+        PositionEndTime: Timestamp.fromDate(new Date(request.body.endDateTime)),
+        RegisteredVolunteers: [],
+    })
+    return response.json({ raceId: res.id })
+
+}
+
+exports.editRaceDays = async (request, response) => {
+
+    raceId = request.body.raceId
+    console.log("editRaceDays called - RaceID: " + raceId)
+
+
+    reqDates = request.body.dates
+    console.log("Dates: ", reqDates)
+
+    //parsed dates
+    const dates = [];
+    request.body.dates.forEach((date) => {
+        console.log(date)
+        dates.push(Timestamp.fromDate(new Date(date)))
+    })
+    console.log("dates: ", dates)
+
+
+    const res = await db.collection("Races").doc(raceId).update({
+        VolunteerDays: dates
+    })
+
+    console.log("updated volunteer days for document ", res.id)
+
+    return response.json(res)
+}
 
 exports.createRace = async (request, response) => {
     raceName = request.body.raceName;
     startDate = Timestamp.fromDate(new Date(request.body.startDate));
+
+    console.log("Creating race with name: ", raceName)
 
 
     const res = await db.collection('Races').add({

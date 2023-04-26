@@ -18,11 +18,9 @@ export default function RacesScreen() {
 
   const [show, setShow] = useState(false);
   const handleOpen = function () {
-    console.log("Opening Modal")
     setShow(true)
   };
   const handleClose = function () {
-    console.log("Closing Modal")
     setShow(false);
   }
 

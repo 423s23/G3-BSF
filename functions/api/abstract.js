@@ -1,28 +1,18 @@
+const { db } = require('../util/admin');
+
 exports.getAbstractVolunteerPositions = async (request, response) => {
-    snapshot = db.collection("AbstractVolunteerPositions")
+    console.log("calling getAbstractVolunteerPositions")
     
-    try{
-        let reqContent = request.params.abstract;
-        //if this fails, get all volunteers
-
-        if ((typeof reqContent == String)){
-            // make single item into a list with one element
-            snapshot.doc(reqContent)
-        }
-        else if(Array.isArray(reqContent)){
-            // do get volunteers with .where('MemberId', 'in', reqContent)
-            snapshot.where(firestore.FieldPath.documentId(), 'in', reqContent)
-        }
-    }
-    catch(e){}
-
-    snapshot.get().then(
+    db.collection("AbstractVolunteerPositions").get().then(
         (data) => {
             let positions = [];
             data.forEach((doc) => {
                 positions.push({
-                PositionId: doc.id,
-                PositionData: doc.data()
+                positionId: doc.id,
+                description: doc.data().Description,
+                licenseName: doc.data().LicenseName,
+                licenseRequired: doc.data().LicenseRequired,
+                positionName: doc.data().PositionName,
             });
         });
         return response.json(positions);
