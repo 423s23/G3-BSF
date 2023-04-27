@@ -2,6 +2,7 @@ const functions = require("firebase-functions");
 const {getRace, getRaces, getVolunteerPositions, createRace, emailVouchers} = require('./api/race')
 const {getVolunteers} = require("./api/volunteer")
 const{getAbstractVolunteerPositions} = require("./api/abstract")
+const {getVoucherList} = require("./api/voucher")
 
 
 
@@ -28,7 +29,9 @@ app.post("/races/:raceId/emailvouchers", emailVouchers);
 app.get("/volunteers", getVolunteers);
 app.get("/abstract", getAbstractVolunteerPositions);
 
-
+//voucher list
+app.get('/voucherlist', getVoucherList)
+app.post("/voucherlist", VoucherList);
 
 
 
