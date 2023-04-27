@@ -63,6 +63,9 @@ export default function Root() {
                         <Button variant="contained" component={Link} to={'createadmin'}>
                             Create Admin
                         </Button>
+                        <Button variant="contained" component={Link} to={'importcsv'}>
+                            Import Codes
+                        </Button>
                         <Button variant="contained" component={Link} to={'help'}>
                             Help
                         </Button>

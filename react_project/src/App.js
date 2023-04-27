@@ -11,6 +11,7 @@ import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailsc
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
 import CreateAdminScreen from "./screens/createAdminScreen";
+import ImportCSV from "./screens/importcsv";
 
 
 
@@ -45,6 +46,10 @@ function App() {
         {
           path: "createadmin",
           element: <CreateAdminScreen />
+        },
+        {
+          path: "importcsv",
+          element:<ImportCSV />
         },
         {
           path: "help",
