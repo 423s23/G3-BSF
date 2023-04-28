@@ -38,6 +38,7 @@ function App() {
         {
           path: "checkin/:raceId/:date",
           element: <CheckInScreen />,
+          loader: CheckinLoader,
         },
         {
           path: "adminlogin",
