@@ -3,10 +3,12 @@ import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Container, CssBaseline, Drawer, List, ListItemButton } from '@mui/material';
+import Stack from '@mui/material/Stack';
+import { Container, CssBaseline, Drawer} from '@mui/material';
 import { useState } from 'react';
 import { Link, Outlet } from 'react-router-dom'
 import Palette from './Palette'
+import Button from '@mui/material/Button';
 
 export default function Root() {
 
@@ -45,18 +47,29 @@ export default function Root() {
                 open={drawerState}
                 onClose={() => handleDrawer()}
             >
-                <List>
-                    <Link to={`races`}> <ListItemButton>Races</ListItemButton></Link>
-                    <Link to={`series`}><ListItemButton>SeriesDetailScreen</ListItemButton></Link>
-                    <Link to={`checkin`}><ListItemButton>CheckInScreen</ListItemButton></Link>
-                    <Link to={`editvolunteers`}><ListItemButton>editRegisteredVolunteers</ListItemButton></Link>
-                    <Link to={`volunteers`}> <ListItemButton>Volunteers</ListItemButton></Link>
-                    <Link to={`races`}><ListItemButton> Races </ListItemButton></Link>
-                    <Link to={`adminlogin`}><ListItemButton> Admin Login </ListItemButton></Link>
-                    <Link to={`createadmin`}><ListItemButton> Create Admin </ListItemButton></Link>
-                    <Link to={'help'}><ListItemButton>Help</ListItemButton></Link>
-
-                </List>
+                <Stack direction="column" alignItems="left" gap={0.25}>
+                        <Button variant="contained" component={Link} to={'races'}>
+                            Races
+                        </Button>
+                        <Button variant="contained" component={Link} to={'series'}>
+                            Series 
+                        </Button>
+                        <Button variant="contained" component={Link} to={'checkin'}>
+                            Check In Screen
+                        </Button>
+                        <Button variant="contained" component={Link} to={'adminlogin'}>
+                            Admin Login
+                        </Button>
+                        <Button variant="contained" component={Link} to={'createadmin'}>
+                            Create Admin
+                        </Button>
+                        <Button variant="contained" component={Link} to={'importcsv'}>
+                            Import Codes
+                        </Button>
+                        <Button variant="contained" component={Link} to={'help'}>
+                            Help
+                        </Button>
+                </Stack>
 
             </Drawer>
             <Container>

@@ -6,13 +6,12 @@ import {
 import Root from "./screens/root"
 import SeriesDetailScreen from "./screens/seriesdetailscreen"
 import CheckInScreen, {loader as CheckinLoader} from "./screens/checkinscreen"
-import EditRegisteredVolunteers from "./screens/editRegisteredVolunteers";
 import RacesScreen from "./screens/racesscreen"
-import VolunteerScreen from "./screens/volunteersscreen";
 import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
 import Help from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
 import CreateAdminScreen from "./screens/createAdminScreen";
+import ImportCSV from "./screens/importcsv";
 
 
 
@@ -39,15 +38,6 @@ function App() {
         {
           path: "checkin/:raceId/:date",
           element: <CheckInScreen />,
-          loader: CheckinLoader,
-        },
-        {
-          path: "editvolunteers",
-          element: <EditRegisteredVolunteers />
-        },
-        {
-          path: "volunteers",
-          element: <VolunteerScreen />
         },
         {
           path: "adminlogin",
@@ -56,6 +46,10 @@ function App() {
         {
           path: "createadmin",
           element: <CreateAdminScreen />
+        },
+        {
+          path: "importcsv",
+          element:<ImportCSV />
         },
         {
           path: "help",
