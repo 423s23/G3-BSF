@@ -1,29 +1,20 @@
-require('dotenv').config()
-const nodemailer = require("nodemailer");
+//get email API credentials
+require('dotenv').config("./.env");
+const sgMail = require('@sendgrid/mail')
 
-
+//set up email transport
+sgMail.setApiKey(process.env.SENDGRID_API_KEY)
 //smtp credentials
-const hostname = process.env.HOSTNAME
-const portnum = process.env.PORTNUM
-const username = process.env.USERNAME
-const password = process.env.PASSWORD
 const fromEmail = process.env.FROMEMAIL
 
 
 
-// Create a SMTP transporter object
-const transporter = nodemailer.createTransport({
-    host: hostname,
-    port: portnum,
-    //secure: true,
-    auth: {
-        user: username,
-        pass: password
-    },
-});
-
-exports.generateVoucherMessage = function (first, last, email, voucherCode) {
+exports.sendVoucherMessage = function (first, last, email, voucherCode) {
     //generate message object
+    console.log("Sending voucher email...")
+    console.log("sendgridAPI: ". process.env.SENDGRID_API_KEY)
+    console.log("sendgridAPI: ". process.env.fromEmail)
+
     var message = {
         from: fromEmail,
         to: `${first} ${last} <${email}>`,
@@ -34,10 +25,19 @@ exports.generateVoucherMessage = function (first, last, email, voucherCode) {
             <p>Your voucher code is <b>${voucherCode}.</b></p>
             <img alt="BSF logo" width="100px" src="https://uploads-ssl.webflow.com/57b4d56c1f986d4879b0574d/581d0395c6f121fb068e4d22_BSFlogo.jpg">`
     }
+    sgMail
+        .send(message)
+        .then(() => {
+            console.log('Email sent')
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+
     return message;
 }
 
-exports.generateConfirmationEmail = function (first, last, email, eventName, date) {
+exports.sendConfirmationEmail = function (first, last, email, eventName, date) {
     var message = {
         from: fromEmail,
         to: `${first} ${last} <${email}>`,
@@ -49,22 +49,15 @@ exports.generateConfirmationEmail = function (first, last, email, eventName, dat
             <p> Event Name: ${eventName}</p>
             <p> Event Date: ${date}</p>`
     }
+    sgMail
+        .send(message)
+        .then(() => {
+            console.log('Email sent')
+        })
+        .catch((error) => {
+            console.error(error)
+        })
+
     return message;
 }
 
-
-exports.sendMail = async function (message) {
-    let results;
-
-    await transporter.sendMail(message, (err, info) => {
-        if (err) {
-            results = 'Error occurred. ' + err.message;
-            //return process.exit(1);
-        }
-        else {
-            results = 'Message sent: %s', info.messageId;
-        }
-    });
-    return results;
-
-}

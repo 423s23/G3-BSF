@@ -31,4 +31,3 @@ exports.getVolunteers = async (request, response) => {
         }
     )
 }
-

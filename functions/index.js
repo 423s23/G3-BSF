@@ -14,15 +14,16 @@ app.get('/races', getRaces);
 app.get('/races/:raceId', getRace);
 app.get("/races/:raceId/positions", getVolunteerPositions);
 app.post("/races/new", createRace)
-app.post("/races/:raceId/emailvouchers", emailVouchers);
-app.post("/races/:raceId/editracedays", editRaceDays);
+    app.post("/races/:raceId/editracedays", editRaceDays);
 app.post("/races/:raceId/addVolunteerPosition",addVolunteerPosition)
+app.post("/races/:raceId/emailvouchers",emailVouchers)
 
 //volunteer data APIs
 app.get("/volunteers", getVolunteers);
 
 //get abstract volunteer descriptions
 app.get("/abstractpositions", getAbstractVolunteerPositions);
+
 
 
 exports.api = functions.https.onRequest(app);

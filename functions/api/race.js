@@ -1,6 +1,6 @@
 const { db } = require('../util/admin');
 const { Timestamp, FieldValue } = require('firebase-admin/firestore');
-const { generateVoucherMessage, sendMail } = require('./emailing.js')
+const { sendVoucherMessage, sendConfirmationEmail } = require('./emailing.js')
 
 
 
@@ -131,14 +131,13 @@ exports.emailVouchers = async (request, response) => {
     const firstName = request.body.firstName;
     const lastName = request.body.lastName;
     const email = request.body.email;
-
     const code = "test-BSF123" //TODO: remove this line once codes are working
     //code = TODO: do db lookup to get code and mark it used.
 
+    console.log("emailing voucher: ", email)
 
-    message = generateVoucherMessage(firstName, lastName, email, code)
-    res = sendMail(message)
-    console.log("emailVouchers Respones: " + res)
 
-    return response.json({ "results": res });
+    message = sendVoucherMessage(firstName, lastName, email, code)
+
+    return response.json("emails sent!");
 }
