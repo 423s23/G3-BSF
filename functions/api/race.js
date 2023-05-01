@@ -105,7 +105,6 @@ exports.editRaceDays = async (request, response) => {
     })
 
     console.log("updated volunteer days for document ", res.id)
-
     return response.json(res)
 }
 

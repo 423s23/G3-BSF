@@ -63,7 +63,7 @@ export default function NewPositionPopop({ raceId, onClose, open, date }) {
     //update DB
     const createNewPosition = function(){
 
-        //format start and end times with relevant date. 
+        //format start and end times/update with relevant date. 
         const startDateTime = new Date(date)
         const endDateTime = new Date(date)
         startDateTime.setHours(startTime.slice(0,2))
@@ -71,7 +71,6 @@ export default function NewPositionPopop({ raceId, onClose, open, date }) {
         endDateTime.setHours(endTime.slice(0,2))
         endDateTime.setMinutes(endTime.slice(3))
 
-        console.log("sending post request")
         axios.post(
             "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/" + raceId + "/addVolunteerPosition",
             {
