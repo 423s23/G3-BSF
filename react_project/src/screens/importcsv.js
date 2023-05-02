@@ -17,7 +17,7 @@ export async function loader({ params }) {
     return race;
 }
 
-export default function ImportCSV(){
+export default function ImportCSVScreen(){
     
     //Arrays to hold our file data
     const[parsedData, setParsedData] = useState([]);

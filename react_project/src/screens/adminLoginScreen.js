@@ -5,13 +5,11 @@ import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
 
 import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
-
+import Container from '@mui/material/Container';   
 import { auth } from "../firebase"
 import { signInWithEmailAndPassword } from "firebase/auth";
 
 import {useState} from "react";
-import AuthDetails from "../authDetails";
 
 export default function AdminLoginScreen() {
 
@@ -19,7 +17,6 @@ export default function AdminLoginScreen() {
     const [password, setPassword] = useState("");
 
     const signIn = () => {
-
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 console.log(userCredential);
@@ -53,7 +50,7 @@ export default function AdminLoginScreen() {
                     </Typography>
 
                     {/*code for email*/}
-                    <Box component="form" noValidate sx={{ mt: 1 }}>
+                    <Box noValidate sx={{ mt: 1 }}>
                         <TextField
                             margin="normal"
                             required
@@ -83,19 +80,14 @@ export default function AdminLoginScreen() {
 
                         {/*code for sign in button*/}
                         <Button
-                            type="submit"
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={signIn()}
+                            onClick={signIn}
 
                         >
                             Sign In
                         </Button>
-
-                    <AuthDetails>
-
-                    </AuthDetails>
 
                     </Box>
                 </Box>

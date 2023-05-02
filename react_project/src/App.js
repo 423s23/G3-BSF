@@ -4,18 +4,19 @@ import {
   RouterProvider,
 } from "react-router-dom";
 import Root from "./screens/root"
-import SeriesDetailScreen from "./screens/seriesdetailscreen"
 import CheckInScreen, {loader as CheckinLoader} from "./screens/checkinscreen"
 import RacesScreen from "./screens/racesscreen"
 import RaceDetailScreen, { loader as RaceIdLoader } from "./screens/racedetailscreen"
-import Help from "./screens/help"
+import HelpScreen from "./screens/help"
 import AdminLoginScreen from "./screens/adminLoginScreen";
 import CreateAdminScreen from "./screens/createAdminScreen";
-import ImportCSV from "./screens/importcsv";
+import ImportCSVScreen from "./screens/importcsv";
+
 
 
 
 function App() {
+
 
   const router = createBrowserRouter([
     {
@@ -32,16 +33,13 @@ function App() {
           loader: RaceIdLoader,
         },
         {
-          path: "series",
-          element: <SeriesDetailScreen />,
-        },
-        {
           path: "checkin/:raceId/:date",
           element: <CheckInScreen />,
           loader: CheckinLoader,
         },
         {
           path: "adminlogin",
+          index: true,
           element: <AdminLoginScreen />
         },
         {
@@ -50,11 +48,11 @@ function App() {
         },
         {
           path: "importcsv",
-          element:<ImportCSV />
+          element:<ImportCSVScreen />
         },
         {
           path: "help",
-          element: <Help />
+          element: <HelpScreen />
         }
       ]
     }

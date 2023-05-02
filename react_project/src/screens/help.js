@@ -1,6 +1,6 @@
 
 
-export default function Help(){
+export default function HelpScreen(){
     return(
         <div>
             <h1>Help Page</h1>
