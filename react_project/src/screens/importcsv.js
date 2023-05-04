@@ -25,7 +25,7 @@ export default function ImportCSVScreen(){
     const[parsedData, setParsedData] = useState([]);
     const [race, updateRace] = useState(useLoaderData());
     const [values, setValues] = useState([]);
-    const [disabled, setDisabled] = useState(false);    
+    const [disabled, setDisabled] = useState(true);    
 
     // THis is what happens when the upload file button is pressed
     const changeHandler = (event) => {
@@ -47,6 +47,7 @@ export default function ImportCSVScreen(){
             console.log(valuesArray)
             },
         });
+        setDisabled(false);
         
     };
     const [uploadingvouchers, uploadingVouchers] = useState([]);
