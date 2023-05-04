@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import { useLoaderData } from "react-router-dom";
 
 import { getRace, Race } from '../models/racemodel';
+import axios from "axios";
+import { ThemeContext } from "@mui/styled-engine";
 
 export async function loader({ params }) {
     let race = new Race();
@@ -43,13 +45,30 @@ export default function ImportCSVScreen(){
             //Parsed data ub array format
             setParsedData(results.data);
             setValues(valuesArray);
+            console.log(valuesArray)
             },
         });
         
     };
+    const [uploadingvouchers, uploadingVouchers] = useState([]);
+    const uploadToFirebase = function() {
+        for(let j = 0; j < values.length; j++){
 
-    
-    
+        
+        console.log("I work")
+        axios.post('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/uploadvoucherlist',
+        {
+            voucherCode: values[j], 
+        },
+        ).then(function (response) {
+            console.log(response.data)
+          }).catch(function (error) {
+            // handle error
+            console.log(error.response.data);
+            console.log("There was an error: " + error)
+          })
+        }
+    }
     //another fucntion that goes through all the entries in 
     // the results array and calls sendTODb on that index
     
@@ -114,7 +133,7 @@ export default function ImportCSVScreen(){
 
         <br />
         <br />
-        <Button variant="contained" component="label" onClick={changeHandler} d>
+        <Button variant="contained" component="label" onClick={uploadToFirebase}>
             Upload Codes
         </Button>
 

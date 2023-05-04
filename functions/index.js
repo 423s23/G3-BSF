@@ -2,7 +2,7 @@ const functions = require("firebase-functions");
 const {addVolunteerPosition,getRace, getRaces, getVolunteerPositions, createRace, emailVouchers, editRaceDays,} = require('./api/race')
 const {getVolunteers} = require("./api/volunteer")
 const{getAbstractVolunteerPositions} = require("./api/abstract")
-//const {getVoucherList, voucherList} = require("./api/voucher")
+const {uploadVoucherList} = require("./api/voucher")
 
 
 //create express app
@@ -24,8 +24,7 @@ app.post("/races/:raceId/emailvouchers",emailVouchers)
 app.get("/volunteers", getVolunteers);
 
 //voucher list
-//app.get('/voucherlist', getVoucherList)
-//app.post("/voucherlist", voucherList);
+app.post("/uploadvoucherlist", uploadVoucherList);
 
 //get abstract volunteer descriptions
 app.get("/abstractpositions", getAbstractVolunteerPositions);
