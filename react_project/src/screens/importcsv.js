@@ -25,8 +25,7 @@ export default function ImportCSVScreen(){
     const[parsedData, setParsedData] = useState([]);
     const [race, updateRace] = useState(useLoaderData());
     const [values, setValues] = useState([]);
-    
-    
+    const [disabled, setDisabled] = useState(false);    
 
     // THis is what happens when the upload file button is pressed
     const changeHandler = (event) => {
@@ -68,6 +67,8 @@ export default function ImportCSVScreen(){
             console.log("There was an error: " + error)
           })
         }
+        setDisabled(true);
+
     }
     //another fucntion that goes through all the entries in 
     // the results array and calls sendTODb on that index
@@ -133,7 +134,7 @@ export default function ImportCSVScreen(){
 
         <br />
         <br />
-        <Button variant="contained" component="label" onClick={uploadToFirebase}>
+        <Button disabled ={disabled} variant="contained" component="label" onClick={uploadToFirebase}>
             Upload Codes
         </Button>
 
