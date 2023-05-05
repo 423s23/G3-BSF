@@ -6,7 +6,10 @@ export default function HelpScreen(){
             <h1>Races, create Admin, import codes, help, log out</h1>
             <h1>Help Page</h1>
             <hr></hr>
-
+            <h3>Important Links: </h3>
+            <p><a href="https://github.com/423s23/G3-BSF.git">GitHub Repo</a></p>
+            <p><a href="https://tasks.office.com/montanaedu.onmicrosoft.com/en-US/Home/Planner/#/plantaskboard?groupId=1b5bd03c-6c85-43ac-b7f9-38ae7b310837&planId=8zZX43In5U-nne1L0M6HVWQAGiwh">Bug Tracker</a></p>
+            <hr></hr>
             <h3>Races</h3>
             <p>
                  The race page is where we create new races as well as get to the volunteer sign in page.
@@ -64,8 +67,8 @@ export default function HelpScreen(){
             <p>
                 If you notice any bugs reach out to the Brider Ski technical team. Make sure to include a screenshot if you are able, as well as a description of what occured. 
             </p>
-            <h3>Github: </h3>
-            <p><a href="https://github.com/423s23/G3-BSF.git">GitHub Repo</a></p>
+            
+            <p></p>
         </div>
     );
 }
