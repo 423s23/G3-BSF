@@ -134,7 +134,7 @@ export default function RaceDetailScreen() {
                     variant="contained"
                     onClick={SendVouchers}
                 >
-                    Email Voucher
+                    Email Vouchers
                 </Button>
                 <Link 
                 to={isActive ? `/checkin/${raceId}/${activeDate.valueOf()}`: `#`}
