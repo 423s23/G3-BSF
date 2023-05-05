@@ -18,26 +18,6 @@ export default function RaceDetailScreen() {
 
     const [appBarTitle, setTitle] = useOutletContext();
 
-    const sendTestEmail = function () {
-        console.log("sending email")
-        axios.post(
-            "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/" + raceId + "/emailvouchers",
-            {
-                firstName: "testMichael",
-                lastName: "testBuffington",
-                email: "michael.t.buffington@gmail.com"
-            },
-        ).then(
-            function (response) {
-                console.log(response)
-            }
-        ).catch(
-            function (error) {
-                console.log(error)
-            }
-        )
-    }
-
     //functionality for date selection
     const[isActive, setActive] = useState(false)
     const [activeDate, setActiveDate] = useState("")
@@ -108,6 +88,39 @@ export default function RaceDetailScreen() {
             })
     }, [])
 
+    const SendVouchers = function () {
+        console.log("sending email")
+
+        positions.forEach((position) => {
+            position.registeredVolunteers.forEach((volunteer) => {
+                console.log("emailing...")
+                console.log("name: ", volunteer.Name)
+                console.log("email: ", volunteer.Email)
+
+                axios.post(
+                    "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/" + raceId + "/emailvouchers",
+                    {
+                        name: volunteer.name,
+                        email: volunteer.email
+                    },
+                ).then(
+                    function (response) {
+                        console.log(response)
+                    }
+                ).catch(
+                    function (error) {
+                        console.log(error)
+                    }
+                )
+            })
+        })
+
+
+        
+
+
+    }
+
     return (
         <Fragment>
             <PositionsForDay dates={raceData.VolunteerDays} activeDate={activeDate} changeActiveDate={changeActiveDate} positions={positions} raceId={raceId} />
@@ -119,9 +132,9 @@ export default function RaceDetailScreen() {
             >
                 <Button
                     variant="contained"
-                    onClick={sendTestEmail}
+                    onClick={SendVouchers}
                 >
-                    Test Emailing
+                    Email Voucher
                 </Button>
                 <Link 
                 to={isActive ? `/checkin/${raceId}/${activeDate.valueOf()}`: `#`}

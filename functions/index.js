@@ -1,7 +1,17 @@
 const functions = require("firebase-functions");
-const {addVolunteerPosition,getRace, getRaces, getVolunteerPositions, createRace, emailVouchers, editRaceDays,} = require('./api/race')
 const {getVolunteers} = require("./api/volunteer")
 const{getAbstractVolunteerPositions} = require("./api/abstract")
+const {
+    checkUserIn, 
+    addVolunteerPosition,
+    getRace, 
+    getRaces, 
+    getVolunteerPositions, 
+    createRace, 
+    emailVouchers, 
+    editRaceDays,
+} = require('./api/race')
+
 //const {getVoucherList, voucherList} = require("./api/voucher")
 
 
@@ -18,6 +28,9 @@ app.post("/races/new", createRace)
 app.post("/races/:raceId/editracedays", editRaceDays);
 app.post("/races/:raceId/addVolunteerPosition",addVolunteerPosition)
 app.post("/races/:raceId/emailvouchers",emailVouchers)
+
+//check in actions
+app.post("/races/:raceId/:date/checkin", checkUserIn)
 
 
 //volunteer data APIs

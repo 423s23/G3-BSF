@@ -65,7 +65,7 @@ exports.getVolunteerPositions = async (request, response) => {
 exports.addVolunteerPosition = async (request, response) => {
     raceId = request.params.raceId
     console.log("getVolunteerPositions called - RaceID: " + raceId)
-    
+
     const res = db.collection("RacePositions").add({
         PositionId: request.body.positionId,
         RaceId: request.body.raceId,
@@ -118,7 +118,7 @@ exports.createRace = async (request, response) => {
     const res = await db.collection('Races').add({
         RaceName: raceName,
         StartDate: startDate,
-        VolunteerDays: [],
+        VolunteerDays: [startDate],
     });
 
     console.log('Added document with ID: ', res.id);
@@ -139,4 +139,43 @@ exports.emailVouchers = async (request, response) => {
     message = sendVoucherMessage(firstName, lastName, email, code)
 
     return response.json("emails sent!");
+}
+
+exports.checkUserIn = async (request, response) => {
+
+    console.log("calling checkuserin!")
+    console.log("params: ", request.params)
+    console.log("body: ", request.body)
+    //const now = Timestamp.fromDate(new Date())
+    //const vdate = Timestamp.fromDate(new Date(request.params.volunteerDate))
+    //console.log("time now: ", now)
+
+    //store volunteers info in database
+    const res = await db.collection('Checkin').add({
+        raceId: request.params.raceId,
+        //volunteerDate: vdate,
+        //checkinTime: now,
+        firstName: request.body.firstName,
+        lastName: request.body.lastName,
+        email: request.body.email,
+        phone: request.body.phone,
+        team: request.body.team,
+        positionId: request.body.positionId
+    }
+    );
+
+    //email volunteer thank you info
+    sendConfirmationEmail(request.body.firstName, request.body.lastName, request.body.email)
+
+    const positionRef = db.collection('RacePositions').doc(request.body.positionId);
+    // Atomically add a new region to the "regions" array field.
+    const updateRes = await positionRef.update({
+        RegisteredVolunteers: FieldValue.arrayUnion({
+            "Id":res,
+            "Email": request.body.email, 
+            "Name":request.body.firstName + " " + request.body.lastName})
+    });
+
+    return response.json({ CheckinId: res, updatelistId: updateRes})
+
 }

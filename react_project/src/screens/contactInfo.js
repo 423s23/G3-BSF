@@ -22,7 +22,10 @@ const teams = [
 ];
 
 
-export default function ContactInfo() {
+export default function ContactInfo( {handlers}) {
+
+    const [handleFirstName, handleLastName, handleEmail, handlePhone, handleTeam] = handlers
+
     return (
         <Container component="main" maxWidth="xs">
             <CssBaseline />
@@ -45,6 +48,9 @@ export default function ContactInfo() {
                         id="firstName"
                         label="First Name"
                         name="firstName"
+                        onChange={
+                            (e) => { handleFirstName(e.target.value)}
+                        }
                     />
                     <TextField
                         margin="normal"
@@ -53,6 +59,9 @@ export default function ContactInfo() {
                         label="Last Name"
                         type="lastName"
                         id="lastName"
+                        onChange={
+                            (e) => { handleLastName(e.target.value)}
+                        }
                     />
 
                     <TextField
@@ -62,6 +71,9 @@ export default function ContactInfo() {
                         label="Email"
                         type="email"
                         id="email"
+                        onChange={
+                            (e) => { handleEmail(e.target.value)}
+                        }
                     />
 
                     <TextField
@@ -71,6 +83,9 @@ export default function ContactInfo() {
                         label="Phone #"
                         type="phone"
                         id="phone"
+                        onChange={
+                            (e) => { handlePhone(e.target.value)}
+                        }
                     />
 
                     <TextField
@@ -81,8 +96,11 @@ export default function ContactInfo() {
                         type="team"
                         id="team"
                         select
-                        defaultValue="teamA"
+                        defaultValue=""
                         helperText="Please select your team"
+                        onChange={
+                            (e) => { handleTeam(e.target.value)}
+                        }
                     >
                         {teams.map((option) => (
                             <MenuItem key={option.value} value={option.value}>

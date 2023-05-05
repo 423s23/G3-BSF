@@ -9,7 +9,7 @@ import { ListItemText, ListItemButton, IconButton, ListItemIcon, Checkbox, } fro
 
 
 
-export default function PositionPicker({ raceId }) {
+export default function PositionPicker({ handler, raceId }) {
 
   //get volunteer positions
   const [positions, setPositionData] = useState([]);
@@ -46,6 +46,7 @@ export default function PositionPicker({ raceId }) {
   const setSelected = function (posId) {
     console.log("Selected: ", posId)
     handleSelected(posId)
+    handler(posId)
   }
 
   return (

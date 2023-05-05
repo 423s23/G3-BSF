@@ -60,35 +60,32 @@ export default function CheckInScreen() {
     const title = raceData.Name + " - " + date.toString().slice(0, 10)
     setTitle(title)
 
-    //handlers for contactInfo
-    const [firstName, handleFirstName] = useState("")
-    const [lastName, handleLastName] = useState("")
-    const [email, handleEmail] = useState("")
-    const [phone, handlePhone] = useState("")
-    const [team, handleTeam] = useState("")
-    const setContactInfo = function(fname,lname,email,phone, team){
-        handleFirstName(fname)
-        handleLastName(lname)
-        handleEmail(email)
-        handlePhone(phone)
-        handleTeam(team)
-    }
-    //handlers for 
 
-return (
-    <Box>
-        <StepperFunction raceId={raceId} />
-    </Box>
-)
+    return (
+        <Box>
+            <StepperFunction raceId={raceId} date={date} />
+        </Box>
+    )
 }
 
 //todo: export ContactInfo into its own file
 
 
 
-function StepperFunction({raceId}) {
+function StepperFunction({ raceId, date }) {
+
+    //handlers for contactInfo
+    const [firstName, handleFirstName] = useState("")
+    const [lastName, handleLastName] = useState("")
+    const [email, handleEmail] = useState("")
+    const [phone, handlePhone] = useState("")
+    const [team, handleTeam] = useState("")
+    const [positionId, handlePosition] = useState("")
+
+    const contactInfoHandlers = [handleFirstName, handleLastName, handleEmail, handlePhone, handleTeam]
+
     const steps = ['Contact Info', 'Position', 'Waiver', 'Submit'];
-    const steps2 = [<ContactInfo />, <PositionPicker raceId={raceId}/>, <Waiver />]
+    const steps2 = [<ContactInfo handlers={contactInfoHandlers} />, <PositionPicker handler={handlePosition} raceId={raceId} />, <Waiver />]
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
 
@@ -113,6 +110,33 @@ function StepperFunction({raceId}) {
 
     const handleReset = () => {
         setActiveStep(0);
+        console.log({
+                "raceId": raceId,
+                "volunteerDate": date,
+                "firstName": firstName,
+                "lastName": lastName,
+                "email": email,
+                "phone": phone,
+                "team": team,
+                "positionId": positionId
+            });
+        axios.post(
+            "https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/races/"+raceId +"/"+date.valueOf()+"/checkin",
+            {
+                raceId: raceId,
+                //volunteerDate: date,
+                firstName: firstName,
+                lastName: lastName,
+                email: email,
+                phone: phone,
+                team: team,
+                positionId: positionId
+            }).then((response) => {
+                console.log(response)
+            }).catch((err) => {
+                console.log(err)
+            })
+
     };
 
     return (
@@ -139,11 +163,11 @@ function StepperFunction({raceId}) {
             {activeStep === steps.length ? (
                 <React.Fragment>
                     <Typography sx={{ mt: 2, mb: 1 }}>
-                        All steps completed - you&apos;re finished
+                        All steps completed - Click Submit!
                     </Typography>
                     <Box sx={{ display: 'flex', pt: 2 }}>
                         <Box sx={{ flex: '1 1 auto' }} />
-                        <Button onClick={handleReset}>Reset</Button>
+                        <Button onClick={handleReset}>Submit</Button>
                     </Box>
                 </React.Fragment>
             ) : (
