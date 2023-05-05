@@ -10,6 +10,8 @@ import Button from '@mui/material/Button';
 import { useLoaderData } from "react-router-dom";
 
 import { getRace, Race } from '../models/racemodel';
+import axios from "axios";
+import { ThemeContext } from "@mui/styled-engine";
 
 export async function loader({ params }) {
     let race = new Race();
@@ -23,8 +25,7 @@ export default function ImportCSVScreen(){
     const[parsedData, setParsedData] = useState([]);
     const [race, updateRace] = useState(useLoaderData());
     const [values, setValues] = useState([]);
-    
-    
+    const [disabled, setDisabled] = useState(true);    
 
     // THis is what happens when the upload file button is pressed
     const changeHandler = (event) => {
@@ -43,13 +44,33 @@ export default function ImportCSVScreen(){
             //Parsed data ub array format
             setParsedData(results.data);
             setValues(valuesArray);
+            console.log(valuesArray)
             },
         });
+        setDisabled(false);
         
     };
+    const [uploadingvouchers, uploadingVouchers] = useState([]);
+    const uploadToFirebase = function() {
+        for(let j = 0; j < values.length; j++){
 
-    
-    
+        
+        console.log("I work")
+        axios.post('https://us-central1-bsfapp-ca8eb.cloudfunctions.net/api/uploadvoucherlist',
+        {
+            voucherCode: values[j], 
+        },
+        ).then(function (response) {
+            console.log(response.data)
+          }).catch(function (error) {
+            // handle error
+            console.log(error.response.data);
+            console.log("There was an error: " + error)
+          })
+        }
+        setDisabled(true);
+
+    }
     //another fucntion that goes through all the entries in 
     // the results array and calls sendTODb on that index
     
@@ -114,7 +135,7 @@ export default function ImportCSVScreen(){
 
         <br />
         <br />
-        <Button variant="contained" component="label" onClick={changeHandler} d>
+        <Button disabled ={disabled} variant="contained" component="label" onClick={uploadToFirebase}>
             Upload Codes
         </Button>
 

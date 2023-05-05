@@ -13,6 +13,7 @@ const {
 } = require('./api/race')
 
 //const {getVoucherList, voucherList} = require("./api/voucher")
+const {uploadVoucherList} = require("./api/voucher")
 
 
 //create express app
@@ -37,8 +38,7 @@ app.post("/races/:raceId/:date/checkin", checkUserIn)
 app.get("/volunteers", getVolunteers);
 
 //voucher list
-//app.get('/voucherlist', getVoucherList)
-//app.post("/voucherlist", voucherList);
+app.post("/uploadvoucherlist", uploadVoucherList);
 
 //get abstract volunteer descriptions
 app.get("/abstractpositions", getAbstractVolunteerPositions);
